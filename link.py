@@ -43,7 +43,7 @@ def main():
                     bak_path = bak_path + ".bak"
                 shutil.move(home_path, bak_path)
 
-            os.remove(home_path) # Remove the existing symlink
+            if lexists(home_path): os.remove(home_path) # Remove the existing symlink
             os.symlink(abspath(tip), home_path)
 
 
