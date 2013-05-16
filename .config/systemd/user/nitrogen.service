@@ -1,0 +1,10 @@
+[Unit]
+Description=Restores Nitrogen-set desktop backgrounds
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nitrogen --restore
+
+[Install]
+WantedBy=apps.target
+

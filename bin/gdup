@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+import os
+from os.path import *
+import subprocess
+
+ALIASES = {
+    'oes': "~/google-drive-oes",
+    'main': "~/google-drive"
+}
+
+def main(args):
+    if len(args) != 1:
+        print("Invalid arguments! Usage: [dir]")
+
+    current_pwd = os.getcwd()
+    path = args[0]
+    if path in ALIASES:
+        path = ALIASES[path]
+
+    path = abspath(expandvars(expanduser(path)))
+    os.chdir(path)
+    print(os.getcwd())
+    subprocess.call(["grive"])
+    os.chdir(current_pwd)
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1:])
+    

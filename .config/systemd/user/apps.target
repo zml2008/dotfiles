@@ -1,0 +1,7 @@
+[Unit]
+Description=Apps to start on login
+Wants=wm.target
+AllowIsolate=true
+
+[Install]
+Alias=default.target
