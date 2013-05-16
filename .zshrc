@@ -7,12 +7,14 @@ HISTSIZE=1000
 SAVEHIST=1000
 autoload colors && colors
 
-alias ls="ls --color=auto -c"
+# Set the editor
 export VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi
 export EDITOR="/usr/bin/vim"
+# Source the aliases configuration
+. ~/.aliases
 
 setopt autocd extendedglob
 # bindkey -e

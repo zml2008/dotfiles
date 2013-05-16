@@ -6,9 +6,8 @@
 [[ $- != *i* ]] && return
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 export EDITOR="/usr/bin/vim"
-alias ls='ls --color=auto -c'
 shopt -s checkwinsize
-
+. ~/.aliases # Aliases file
 export VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
   alias less=$VLESS

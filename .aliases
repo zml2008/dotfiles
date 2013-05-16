@@ -1,0 +1,16 @@
+# Useful system commands
+alias svim="sudo vim $*"
+alias ls='ls --color=auto -c'
+
+# Systemd
+alias sys="sudo systemctl $*"
+alias usys="systemctl --user $*"
+
+# Useful directories
+alias cddb="cd ~/Dropbox/$*"
+
+if [ -e ~/.aliases.local ]; then
+    . ~/.aliases.local
+fi
+
+# vim: set filetype=sh :
