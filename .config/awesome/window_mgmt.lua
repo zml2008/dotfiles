@@ -27,8 +27,8 @@ window_mgmt.layouts = {
 window_mgmt.default_layout = awful.layout.suit.fair
 
 window_mgmt.tag_patterns = {
-    {match_screen = "primary", tags = {"misc", {"web", awful.layout.suit.max}, {"dev", awful.layout.suit.magnifier}, {"media", awful.layout.suit.max}}},
-    {match_screen = "secondary", tags = {{ "term", awful.layout.suit.tile.top }, "audio" }}
+    {match_screen = "primary", tags = {"misc", {"web", awful.layout.suit.max}, {"dev", awful.layout.suit.tile.left}, {"media", awful.layout.suit.max}, "work"}},
+    {match_screen = "secondary", tags = {{ "term", awful.layout.suit.tile.top }, "audio", "irc"}}
 }
 
 window_mgmt.tags = {}
