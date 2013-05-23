@@ -1,6 +1,7 @@
 # Useful system commands
 alias svim="sudo vim $*"
 alias ls='ls --color=auto -c'
+alias mkncd="mkdir -p $* && cd $*"
 
 # Systemd
 alias sys="sudo systemctl $*"
