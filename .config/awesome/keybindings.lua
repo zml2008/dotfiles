@@ -9,6 +9,7 @@ local modkey = modkey
 local terminal = terminal
 local require = require
 local mouse = mouse
+local screen = screen
 local window_mgmt = require('window_mgmt')
 
 module("keybindings")
@@ -120,8 +121,48 @@ globalkeys = awful.util.table.join(
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+
+    -- Mouse location control
+    awful.key({modkey}, ".", function () -- move mouse to next screen
+      local sid = mouse.screen + 1
+      if sid > screen.count() then sid = 1 end
+      s_geom = screen[sid].geometry
+
+      mouse.coords({x=s_geom.x + (s_geom.width / 2), y=s_geom.y + s_geom.height / 2})
+    end),
+    awful.key({modkey}, ",", function () -- move to top of window
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        mouse.coords({x=mouse.coords().x, y=c:geometry().y})
+      end
+     end),
+    awful.key({modkey}, "o", function () -- down
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=mouse.coords().x, y=(geom.y + geom.height)})
+      end
+    end),
+    awful.key({modkey}, "a", function () -- left
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        mouse.coords({x=c:geometry().x, y=mouse.coords().y})
+      end
+    end),
+    awful.key({modkey}, "e", function () -- right
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=(geom.x + geom.width), y=mouse.coords().y})
+      end
+    end),
+    awful.key({modkey}, "u", function () -- center of window
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=(geom.x + geom.width / 2), y=(geom.y  + geom.height / 2)})
+      end
+    end)
 )
 
 -- Bind all key numbers to tags.
@@ -173,7 +214,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+    awful.key({ modkey,           }, ";",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
         function (c)
