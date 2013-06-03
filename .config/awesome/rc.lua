@@ -9,7 +9,7 @@ local keybindings = require("keybindings")
 local window_mgmt = require("window_mgmt")
 
 -- Init
-utils.override_awesome_quit()
+--utils.override_awesome_quit()
 utils.check_errors()
 
 

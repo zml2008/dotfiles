@@ -11,6 +11,8 @@ export _JAVA_AWT_WM_NOREPARENTING=1
 
 xhost local:boinc &
 xset r rate 220 &
-exec /usr/lib/systemd/systemd --user
+
+exec startup-ctl
+#exec /usr/lib/systemd/systemd --user
 
 # vim: set filetype=sh :
