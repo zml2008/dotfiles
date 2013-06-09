@@ -25,6 +25,13 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+if [ "$TERM" = "st-256color" ]; then
+    function zle-line-init () { echoti smkx }
+    function zle-line-finish () { echoti rmkx } 
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
+
 # SSH stuff
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 if [ -n "$SSH_CONNECTION" ]; then
