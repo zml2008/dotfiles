@@ -6,8 +6,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 local wibox = require("wibox")
 
-local keybindings = require("keybindings")
-local bar = require("bar")
+local widgets = require("widgets")
 
 
 -- constants
@@ -151,11 +150,12 @@ init_connection()
 
 
 -- Install into registry
-keybindings.widget_buttons.music_ctl = awful.util.table.join(
+keybindings.widget_buttons.music_ctl = 
+
+widgets.music_ctl = widgets.define(make, awful.util.table.join(
     awful.button({}, 1, function () controller.playpause() end)
     )
-
-bar.widgets.music_ctl = make
+)
 
 return {
     controller=controller,

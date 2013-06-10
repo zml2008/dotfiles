@@ -2,12 +2,15 @@ local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 local beautiful = require("beautiful")
+local tyrannical = require("tyrannical")
 local tonumber = tonumber
 require("defines")
+local keybindings = require("keybindings")
+local bar = require('bar')
 
 local window_mgmt = {}
 
--- data structures
+-- window placement rules
 
 window_mgmt.layouts = {
     awful.layout.suit.floating,
@@ -26,89 +29,289 @@ window_mgmt.layouts = {
 
 window_mgmt.default_layout = awful.layout.suit.fair
 
-window_mgmt.tag_patterns = {
-    {match_screen = "primary", tags = {"misc", {"web", awful.layout.suit.max}, {"dev", awful.layout.suit.tile.left}, {"media", awful.layout.suit.max}, "work"}},
-    {match_screen = "secondary", tags = {{ "term", awful.layout.suit.tile.top }, "audio", "irc"}}
-}
-
-window_mgmt.tags = {}
-
-window_mgmt.all_window_properties = {
-                    border_width = beautiful.border_width,
-                    border_color = beautiful.border_normal,
-                    focus = awful.client.focus.filter,
-                    }
-
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = window_mgmt.all_window_properties },
-    { rule = { class = "MPlayer" },
+      properties = {
+                    border_width = beautiful.border_width,
+                    border_color = beautiful.border_normal,
+                    focus = awful.client.focus.filter,
+                    keys = keybindings.clientkeys(),
+                    buttons = keybindings.clientbuttons()
+                    } },
+    { rule = { role = "conversation" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+      properties = { floating = true, ontop = true } },
+    --{ rule = { class = "gimp" },
+     -- properties = { floating = true } },
     { rule = { class = "st-256color" },
       properties = { opacity = 0.8} },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 
-local function get_tag_lazy(screen, name)
-    return nil
-end
+tyrannical.tags = {
+    {
+        name        = "term",                 -- Call the tag "Term"
+        init        = true,                   -- Load the tag on startup
+        exclusive   = true,                   -- Refuse any other type of clients (by classes)
+        screen      = screen.count() > 1 and 2 or 1,                  -- Create this tag on screen 1
+        layout      = awful.layout.suit.tile.top, -- Use the tile layout
+        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
+            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal", "st-256color", "st"
+        }
+    },
+    {
+        name = "media",
+        init = false,
+        screen = {1, 2},
+        -- clone_on = 2,
+        exclusive = true,
+        layout = awful.layout.suit.fair,
+        class = {
+        "pithos", "pavucontrol", "vlc", "netflix-desktop", "spotify", "firefox.exe" -- firefox.exe is always netflix-desktop
+        }
+    },
+    {
+        name        = "www",
+        init        = false,
+        exclusive   = false,
+      --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
+        screen      = 1,
+        layout      = awful.layout.suit.max,      -- Use the max layout
+        class = {
+            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
+            "Chromium"      , "nightly"        , "minefield", "google-chrome" }
+    } ,
+    {
+        name = "comms",
+        init        = false,
+        exclusive   = true,
+        screen      = 1,
+        mwfact = 0.15,
+        layout      = awful.layout.suit.tile,
+        exec_once   = {"pidgin", "geary"}, --When the tag is accessed for the first time, execute this command
+        class  = {
+            "pidgin", "geary", "quassel",
+        }
+    } ,
+    {
+        name = "dev",
+        init        = true,
+        exclusive   = true,
+        screen      = {1, 2},
+        -- clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
+                         -- The tag can be used on both screen, but only one at once
+        layout      = awful.layout.suit.max                          ,
+        class ={ 
+            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "sublime-text", "jetbrains-idea"
+        }
+    } ,
+    {
+        name        = "etc",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = false,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"          , "VCLSalFrame"                         }
+    } ,
+}
 
--- Tag handling
-local function matches_screen(match_string, s, primary_screen)
-    if s == primary_screen and match_string == "primary" then
-        return true
-    elseif (s ~= primary_screen or screen.count() == 1) and match_string == "secondary" then -- if there's only one screen, put all the tags on one.
-        return true
-    elseif tonumber(match_string) == s then
-        return true
-    else
-        return false
-    end
-end
+-- Ignore the tag "exclusive" property for the following clients (matched by classes)
+tyrannical.properties.intrusive = {
+    "ksnapshot"     , "pinentry"       , "gtksu"     , "kcalc"        , "xcalc"               ,
+    "feh"           , "Gradient editor", "About KDE" , "Paste Special", "Background color"    ,
+    "kcolorchooser" , "plasmoidviewer" , "Xephyr"    , "kruler"       , "plasmaengineexplorer",
+    "sublime-text"
+}
 
-local function tag_pair_to_tables(tag_table)
-    names = {}
-    layouts = {}
-    for _, v in ipairs(tag_table) do
-        if type(v) == "string" then
-            table.insert(names, v)
-            table.insert(layouts, window_mgmt.default_layout)
-        elseif type(v) == "table" then
-            table.insert(names, v[1])
-            table.insert(layouts, v[2])
-        end
-    end
-    return names, layouts
-end
+-- Ignore the tiled layout for the matching clients
+tyrannical.properties.floating = {
+    "MPlayer"      , "pinentry"        , "ksnapshot"  , "pinentry"     , "gtksu"          ,
+    "xine"         , "feh"             , "kmix"       , "kcalc"        , "xcalc"          ,
+    "yakuake"      , "Select Color$"   , "kruler"     , "kcolorchooser", "Paste Special"  ,
+    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer" 
+}
 
-function window_mgmt:init_tags(primary_screen)
-    for s = 1, screen.count() do
-        for i, v in ipairs(self.tag_patterns) do
-            if matches_screen(v.match_screen, s, primary_screen) then
-                local names, layouts = tag_pair_to_tables(v.tags)
-                local tags = awful.tag(names, s, layouts)
-                local mapped_tags = window_mgmt.tags[s]
-                if mapped_tags == nil then mapped_tags = {} end
+-- Make the matching clients (by classes) on top of the default layout
+tyrannical.properties.ontop = {
+    "Xephyr"       , "ksnapshot"       , "kruler"
+}
 
-                window_mgmt.tags[s] = mapped_tags
-                window_mgmt.tags[v.match_screen] = mapped_tags
-                for i, tag in ipairs(tags) do
-                    mapped_tags[tag.name] = tag
-                end
+-- Force the matching clients (by classes) to be centered on the screen on init
+tyrannical.properties.centered = {
+    "kcalc"
+}
+
+-- keybindings
+-- Keys that apply to all windows - these are the only keybindings directly applied in this file
+keybindings.globalkeys(awful.util.table.join(
+    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
+    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+
+    awful.key({ modkey,           }, "j",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey,           }, "k",
+        function ()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end
+        end),
+
+    -- Layout manipulation
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey,           }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
             end
+        end),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
+    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc(window_mgmt.layouts,  1) end),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(window_mgmt.layouts, -1) end),
+
+    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+    
+
+    -- Mouse location control
+    awful.key({modkey}, ".", function () -- move mouse to next screen
+      local sid = mouse.screen + 1
+      if sid > screen.count() then sid = 1 end
+      s_geom = screen[sid].geometry
+
+      mouse.coords({x=s_geom.x + (s_geom.width / 2), y=s_geom.y + s_geom.height / 2})
+    end),
+    awful.key({modkey}, ",", function () -- move to top of window
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        mouse.coords({x=mouse.coords().x, y=c:geometry().y})
+      end
+     end),
+    awful.key({modkey}, "o", function () -- down
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=mouse.coords().x, y=(geom.y + geom.height)})
+      end
+    end),
+    awful.key({modkey}, "a", function () -- left
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        mouse.coords({x=c:geometry().x, y=mouse.coords().y})
+      end
+    end),
+    awful.key({modkey}, "e", function () -- right
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=(geom.x + geom.width), y=mouse.coords().y})
+      end
+    end),
+    awful.key({modkey}, "u", function () -- center of window
+      local c = awful.mouse.client_under_pointer()
+      if c then
+        local geom = c:geometry()
+        mouse.coords({x=(geom.x + geom.width / 2), y=(geom.y  + geom.height / 2)})
+      end
+    end),
+    awful.key({modkey}, "p", function ()
+        local pbox = bar.screen_widgets[mouse.screen].promptbox
+        if pbox then
+            awful.prompt.run({ prompt = "Add a new tag: " },
+            pbox.widget,
+            function (txt)
+                awful.tag.add(txt, {})
+            end)
         end
-    end
+    end),
+    awful.key({modkey, "Shift"}, "p", function ()
+            awful.tag.delete()
+        end)
+))
+
+-- Bind all key numbers to tags.
+-- Be careful: we use keycodes to make it works on any keyboard layout.
+-- This should map on the top row of your keyboard, usually 1 to 9.
+for i = 1, 9 do
+    keybindings.globalkeys(awful.util.table.join(
+        awful.key({ modkey }, "#" .. i + 9,
+                  function ()
+                        local screen = mouse.screen
+                        local tag = awful.tag.gettags(screen)[i]
+                        if tag then
+                           awful.tag.viewonly(tag)
+                        end
+                  end),
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
+                  function ()
+                      local screen = mouse.screen
+                      local tag = awful.tag.gettags(screen)[i]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end),
+        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+                  function ()
+                      local tag = awful.tag.gettags(client.focus.screen)[i]
+                      if client.focus and tag then
+                          awful.client.movetotag(tag)
+                     end
+                  end),
+        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+                  function ()
+                      local tag = awful.tag.gettags(client.focus.screen)[i]
+                      if client.focus and tag then
+                          awful.client.toggletag(tag)
+                      end
+                  end)))
 end
 
 
+keybindings.clientkeys(awful.util.table.join(
+    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey,           }, ";",      awful.client.movetoscreen                        ),
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, "n",
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+        end)
+))
 
+local altkey = "Mod1"
+keybindings.clientbuttons(awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ altkey }, 1, awful.mouse.client.move),
+    awful.button({ altkey }, 3, awful.mouse.client.resize)
+))
+
+
+-- # EVENT LOGIC #
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
     -- Enable sloppy focus

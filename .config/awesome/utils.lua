@@ -1,11 +1,14 @@
+require("defines")
 local awful = require("awful")
 local naughty = require("naughty")
+local keybindings = require("keybindings")
+local bar = require("bar")
 
-utils = {}
+local utils = {}
 
 -- This replaces the awesome builtin quit function with one that also is kind enough to call systemd and clear up leftovers
 function utils.override_awesome_quit()
-    old_quit = awesome.quit
+    local old_quit = awesome.quit
     awesome.quit = function ()
         old_quit()
         awful.spawn("systemctl --user exit") -- Might cause loop issues with awesome, hopefully they have protection against that?
@@ -35,5 +38,32 @@ function utils.check_errors()
         in_error = false
     end)
 end
+
+keybindings.globalkeys(awful.util.table.join(
+    -- Standard program
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+
+    -- Prompt
+    awful.key({ modkey },            "r",     
+      function () 
+        local pbox = bar.screen_widgets[mouse.screen].promptbox
+        if pbox then
+          pbox:run()
+        end
+      end),
+
+    awful.key({ modkey }, "x",
+        function ()
+            local pbox = bar.screen_widgets[mouse.screen].promptbox
+            if pbox then
+                awful.prompt.run({ prompt = "Run Lua code: " },
+                pbox.widget,
+                awful.util.eval, nil,
+                awful.util.getdir("cache") .. "/history_eval")
+            end
+        end)
+    ))
 
 return utils

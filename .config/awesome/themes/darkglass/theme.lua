@@ -18,14 +18,15 @@ theme = shiny.theme_inherit("zenburn")
 theme.font      = "sans 8"
 
 -- Opacity in hex
-local opacity = 255 * 0.75
+local opacity = 255 * 0.6
 -- {{{ Colors
 theme.fg_normal  = shiny.color(0xDC, 0xDC, 0xCC)
 theme.fg_focus   = shiny.color(0xF0, 0xDF, 0xAF)
 theme.fg_urgent  = shiny.color(0xCC, 0x93, 0x33)
 theme.bg_normal  = shiny.color(0x3F, 0x3F, 0x3F, opacity)
-theme.bg_focus   = shiny.color(0x1E, 0x23, 0x20, opacity) -- Emphasize focused
-theme.bg_urgent  = shiny.color(0x3F, 0x3F, 0x3F, opacity + 5) -- Even more for urgent
+theme.bg_focus  = shiny.color(0x28, 0x28, 0x28, opacity + 5)
+--theme.bg_focus   = shiny.color(0x1E, 0x23, 0x20, opacity) -- Emphasize focused
+theme.bg_urgent  = shiny.color(0x28, 0x28, 0x28, opacity + 10) -- Even more for urgent
 theme.bg_systray = theme.bg_normal
 -- }}}
 
