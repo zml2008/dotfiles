@@ -1,0 +1,6 @@
+[submodule ".config/awesome/tyrannical"]
+	path = .config/awesome/tyrannical
+	url = git://github.com/Elv13/tyrannical.git
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
