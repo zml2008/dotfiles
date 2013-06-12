@@ -35,7 +35,7 @@ local function create_vprogbar()
 end
 
 widgets.separator = define(singleton_factory(function (s)
-	return wibox.widget.textbox("  ")
+	return wibox.widget.textbox("")
 end))
 
 widgets.tasklist = define(function (s) return awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, 
