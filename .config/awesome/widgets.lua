@@ -138,5 +138,10 @@ widgets.weather = define(singleton_factory(function ()
         vicious.register(ret, vicious.widgets.weather, "☀ ${tempc}⁰C", 61, "KPDX")
         return ret
     end))
+widgets.battery = define(singleton_factory(function ()
+            local ret = wibox.widget.textbox()
+            vicious.register(ret, vicious.widgets.bat, "$1$2", 63, "BAT0")
+            return ret
+        end))
 
 return widgets
