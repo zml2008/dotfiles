@@ -10,6 +10,7 @@ local utils = require("utils")
 -- Init
 --utils.override_awesome_quit()
 utils.check_errors()
+require("mediakeys")
 
 
 -- Extra widgets

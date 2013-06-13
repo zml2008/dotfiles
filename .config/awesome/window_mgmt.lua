@@ -103,7 +103,7 @@ tyrannical.tags = {
                          -- The tag can be used on both screen, but only one at once
         layout      = awful.layout.suit.max                          ,
         class ={ 
-            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "sublime-text", "jetbrains-idea"
+            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "sublime-text", "jetbrains-idea", "sublime_text"
         }
     } ,
     {
