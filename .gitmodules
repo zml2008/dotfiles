@@ -7,3 +7,6 @@
 [submodule ".config/awesome/pulseaudio"]
 	path = .config/awesome/pulseaudio
 	url = git://github.com/orofarne/pulseaudio-awesome.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
