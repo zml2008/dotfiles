@@ -1,13 +1,11 @@
 filetype plugin indent on
-
-if &t_Co > 1
-    syntax enable
-endif
+au BufRead,BufNewFile *.md  set filetype=markdown
+syntax enable
 
 execute pathogen#infect()
 
 " autocmd FileType markdown set spell
-set background=dark
+set background=light
 colorscheme solarized
 set expandtab
 set tabstop=4
