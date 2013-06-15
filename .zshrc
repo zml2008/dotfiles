@@ -46,6 +46,9 @@ else
     PS1="$fg[blue][\u@\h:$fg[yellow]\W$fg[blue]]$reset"
 fi
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+source .zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Intro message
 echo -e "$fg[magenta]$(fortune -s | cowsay -s -W60)$reset_color"
 
