@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import os
+import sys
 import shutil
 from os.path import *
 
@@ -22,6 +23,7 @@ def check_dir(path):
     return path
 
 def main():
+    sys.stdout.write("Linking symlinks... ")
     root_dir = dirname(__file__)
     home = os.environ["HOME"]
     for root, dirs, files in os.walk(root_dir):
@@ -45,6 +47,8 @@ def main():
 
             if lexists(home_path): os.remove(home_path) # Remove the existing symlink
             os.symlink(abspath(tip), home_path)
+
+    sys.stdout.write("Done\n")
 
 
 
