@@ -4,6 +4,7 @@ from __future__ import print_function
 import os
 import sys
 import shutil
+import json
 from os.path import *
 
 IGNORE_FILES = [
@@ -15,6 +16,13 @@ IGNORE_DIRS = [
         ".git"
         ]
 
+def open_links_file():
+    try:
+        with open(join(os.environ["HOME"], ".dotfiles_links"), 'rt') as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
 def check_dir(path):
     dir_name = dirname(path)
 
@@ -24,6 +32,9 @@ def check_dir(path):
 
 def main():
     sys.stdout.write("Linking symlinks... ")
+    existing_links = open_links_file()
+    created_links = {}
+
     root_dir = dirname(__file__)
     home = os.environ["HOME"]
     for root, dirs, files in os.walk(root_dir):
@@ -47,6 +58,13 @@ def main():
 
             if lexists(home_path): os.remove(home_path) # Remove the existing symlink
             os.symlink(abspath(tip), home_path)
+            created_links[abspath(tip)] = home_path
+    for k, v in existing_links.items():
+        if not k in created_links:
+            os.unlink(v)
+
+    with open(join(os.environ["HOME"], ".dotfiles_links"), 'wt') as f:
+        json.dump(created_links, f)
 
     sys.stdout.write("Done\n")
 
