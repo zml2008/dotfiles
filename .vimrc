@@ -10,7 +10,7 @@ colorscheme solarized
 set expandtab
 set tabstop=4
 set shiftwidth=4
-
+set number
 set laststatus=2
 set encoding=utf-8
 
