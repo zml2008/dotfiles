@@ -11,6 +11,7 @@ export _JAVA_AWT_WM_NOREPARENTING=1
 
 xhost local:boinc &
 xset r rate 220 &
+xmodmap -e 'clear Lock'-e 'keycode 0x32 = Escape'
 
 exec startup-ctl
 #exec /usr/lib/systemd/systemd --user
