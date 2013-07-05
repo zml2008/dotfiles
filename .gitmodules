@@ -16,3 +16,15 @@
 [submodule ".vim/bundle/vim-jinja"]
 	path = .vim/bundle/vim-jinja
 	url = git://github.com/lepture/vim-jinja.git
+[submodule ".vim/bundle/neocomplete"]
+	path = .vim/bundle/neocomplete
+	url = git://github.com/Shougo/neocomplete.vim.git
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule ".vim/bundle/vim-afterimage"]
+	path = .vim/bundle/vim-afterimage
+	url = git://github.com/tpope/vim-afterimage.git
+[submodule ".vim/bundle/vim-eunuch"]
+	path = .vim/bundle/vim-eunuch
+	url = git://github.com/tpope/vim-eunuch.git
