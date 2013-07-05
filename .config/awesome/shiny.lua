@@ -47,7 +47,7 @@ end
 
 function shiny.color(r, g, b, a) -- or (rgb, a)
 	if b == nil then
-		if r[0] ~= '#' then r = '#' .. r end
+		if r[1] ~= '#' then r = '#' .. r end
 		return r .. to_hex_str(g)
 	else
 		local color_str = '#' .. to_hex_str(r) .. to_hex_str(g) .. to_hex_str(b)
