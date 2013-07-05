@@ -42,6 +42,7 @@ fi
 # Prompt fancification
 if [ -e /usr/share/zsh/site-contrib/powerline.zsh ]; then
 . /usr/share/zsh/site-contrib/powerline.zsh
+export VIRTUAL_ENV_DISABLE_PROMPT="true"
 else
     PS1="$fg[blue][\u@\h:$fg[yellow]\W$fg[blue]]$reset"
 fi
