@@ -162,7 +162,7 @@ function <SID>CloseStackPop(char) " ---{{{2
         pclose
     endif
     if len(s:closeStack) == 0
-        return <SID>JumpOut(a:char)
+        return a:char " <SID>JumpOut(a:char)
     endif
     let column = col('.') - 1
     let line = getline('.')
