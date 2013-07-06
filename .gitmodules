@@ -19,12 +19,12 @@
 [submodule ".vim/bundle/neocomplete"]
 	path = .vim/bundle/neocomplete
 	url = git://github.com/Shougo/neocomplete.vim.git
-[submodule ".vim/bundle/vim-surround"]
-	path = .vim/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
 [submodule ".vim/bundle/vim-afterimage"]
 	path = .vim/bundle/vim-afterimage
 	url = git://github.com/tpope/vim-afterimage.git
 [submodule ".vim/bundle/vim-eunuch"]
 	path = .vim/bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
+[submodule ".config/awesome/eminent"]
+	path = .config/awesome/eminent
+	url = git://git.glacicle.org/awesome/eminent.git
