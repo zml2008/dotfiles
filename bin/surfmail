@@ -1,0 +1,22 @@
+#!/bin/bash
+RUNNING=1
+
+function open_tab() {
+    URL=$1
+    XID=$2
+    
+#    while [ $RUNNING ]; do
+        surf -e $XID $URL
+#    done
+}
+
+TABBED_XID=$(tabbed -d)
+echo $TABBED_XID
+if [ -z "$TABBED_XID" ]; then
+    exit 1
+fi
+
+open_tab "http://mail.google.com/mail/u/0/" "$TABBED_XID" &
+open_tab "http://mail.google.com/mail/u/1" "$TABBED_XID" &
+
+exec wait $(pidof tabbed); RUNNING=0
