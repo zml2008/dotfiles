@@ -10,6 +10,12 @@ alias usys="systemctl --user $*"
 # Useful directories
 alias cddb="cd ~/Dropbox/$*"
 
+
+# Quick HTTP server
+server() {
+  python -m http.server $@
+}
+
 if [ -e ~/.aliases.local ]; then
     . ~/.aliases.local
 fi
