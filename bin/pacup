@@ -67,14 +67,16 @@ def show_notification(transaction):
         note = notify.Notification.new("Out of date", "There are " + str(len(packages)) + " updates available!", "dialog-warning")
         note.set_urgency(notify.Urgency.CRITICAL)
         note.add_action("view-packages", "View packages with available updates", display_list, packages, None)
+        note.connect("closed", close_if_not_update_button)
+        note.show()
+        gtk.main()
     else:
         note = notify.Notification.new("Up to date", "Congratulations, you're up to date!", None)
         note.set_urgency(notify.Urgency.LOW)
-    note.connect("closed", close_if_not_update_button)
-    note.show()
-    gtk.main()
+        note.show()
 
 def close_if_not_update_button(note):
+    print("Notification closed")
     if not DIALOG_DISPLAYED:
         gtk.main_quit()
 
@@ -91,11 +93,6 @@ def main():
         # update_dbs(handle)
         transaction.sysupgrade(False)
         show_notification(transaction)
-        # print(', '.join([item.name + "-" + item.version for item in transaction.to_add]))
-        
-        #hello = notify.Notification.new("Hello world", "This is an example notification", "dialog-information")
-        #hello.set_urgency(notify.Urgency.CRITICAL)
-        #hello.show()
     except pyalpm.error:
         traceback.print_exc()
     except Exception as e:
