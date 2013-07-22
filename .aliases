@@ -16,6 +16,10 @@ server() {
   python -m http.server $@
 }
 
+diechromedie() {
+    for proc in $(ps -aux | grep chrome | grep -v grep | awk '{ print $2}'); kill -9 $proc
+}
+
 if [ -e ~/.aliases.local ]; then
     . ~/.aliases.local
 fi
