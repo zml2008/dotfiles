@@ -1,4 +1,10 @@
 #!/bin/sh
 
+function hexchat_cmd () {
+    gdbus call --session --dest org.hexchat.service --object-path /org/hexchat/Remote --method org.hexchat.plugin.Command "$@" > /dev/null
+}
+
+hexchat_cmd "allserv away The screensaver script is running or has blown up"
 xset dpms force off
-slock &
+slock
+hexchat_cmd "allserv back"
