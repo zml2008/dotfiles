@@ -1,9 +1,0 @@
-[Unit]
-Description=Wrapper around services started by XDG Desktop files
-
-[Service]
-ExecStart=/usr/bin/dex -e systemd -a
-
-[Install]
-WantedBy=apps.target
-

@@ -1,9 +1,0 @@
-[Unit]
-Description=cairo-powered composite manager
-Requires=wm.target
-
-[Service]
-ExecStart=/usr/bin/cairo-compmgr
-
-[Install]
-WantedBy=apps.service
