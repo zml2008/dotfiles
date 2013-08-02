@@ -28,3 +28,6 @@
 [submodule ".config/awesome/eminent"]
 	path = .config/awesome/eminent
 	url = git://git.glacicle.org/awesome/eminent.git
+[submodule ".config/awesome/irc"]
+	path = .config/awesome/irc
+	url = git://github.com/JakobOvrum/LuaIRC.git

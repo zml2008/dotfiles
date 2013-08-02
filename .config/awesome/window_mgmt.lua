@@ -13,21 +13,17 @@ local window_mgmt = {}
 -- window placement rules
 
 window_mgmt.layouts = {
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.top,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating
 }
-
-window_mgmt.default_layout = awful.layout.suit.fair
 
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -58,11 +54,9 @@ window_mgmt.tag_presets = {
     ["terms"]={"st", "st", "st"},
     ["browser"]={"surf"}
 }
-tagged.default_layout = window_mgmt.default_layout
 tagged.init({
     {
         name = "term",
-        only_matching = true,
         screen = screen.count() > 1 and 2 or 1,
         layout = awful.layout.suit.tile.top,
     },
@@ -81,8 +75,8 @@ tagged.init({
     {
         name = "comms",
         screen      = 1,
-        mwfact = 0.15,
-        layout      = awful.layout.suit.tile,
+--        mwfact = 0.15,
+        layout      = awful.layout.suit.tile.top,
     } ,
     {
         name = "dev",

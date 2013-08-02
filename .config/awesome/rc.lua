@@ -11,7 +11,7 @@ local utils = require("utils")
 --utils.override_awesome_quit()
 utils.check_errors()
 require("mediakeys")
-
+require("ircnotify").setup_irc()
 
 -- Extra widgets
 -- local music_ctl = require("music_ctl")
