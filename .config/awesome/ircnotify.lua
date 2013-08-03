@@ -44,7 +44,7 @@ function ircnotify.setup_irc()
             local msg = ""
             if args.appname then msg = args.appname .. " - " end
             msg = msg .. args.title .. ": " .. args.text
-            bot:sendChat(channel, msg)
+            bot:sendChat(config.channel, msg)
             return args
         end
         return args
