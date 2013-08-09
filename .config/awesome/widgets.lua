@@ -6,7 +6,7 @@ local beautiful = require("beautiful")
 
 local widgets = {}
 
-local function define(create_func, buttons)
+function widgets.define(create_func, buttons)
 	return function (...)
 		local ret = create_func(...)
 		if buttons then
@@ -15,6 +15,7 @@ local function define(create_func, buttons)
 		return ret
 	end
 end
+local define = widgets.define
 
 local function singleton_factory(factory_func)
     local widget_obj = nil

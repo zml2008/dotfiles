@@ -6,16 +6,6 @@ local bar = require("bar")
 
 local utils = {}
 
--- This replaces the awesome builtin quit function with one that also is kind enough to call systemd and clear up leftovers
-function utils.override_awesome_quit()
-    local old_quit = awesome.quit
-    awesome.quit = function ()
-        old_quit()
-        awful.spawn("systemctl --user exit") -- Might cause loop issues with awesome, hopefully they have protection against that?
-    end
-end
-
-
 function utils.check_errors()
 	-- Check if awesome encountered an error during startup and fell back to
 	-- another config (This code will only ever execute for the fallback config)
@@ -38,7 +28,6 @@ function utils.check_errors()
         in_error = false
     end)
 end
-
 keybindings.globalkeys(awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -65,5 +54,4 @@ keybindings.globalkeys(awful.util.table.join(
             end
         end)
     ))
-
 return utils

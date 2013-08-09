@@ -3,15 +3,19 @@ require("defines")
 local shiny = require("shiny")
 shiny.init("darkglass")
 
-local bar = require("bar")
-local window_mgmt = require("window_mgmt")
 local utils = require("utils")
 
 -- Init
---utils.override_awesome_quit()
 utils.check_errors()
-require("mediakeys")
-require("ircnotify").setup_irc()
+local bar = require("bar")
+local window_mgmt = require("window_mgmt")
 
 -- Extra widgets
--- local music_ctl = require("music_ctl")
+--local music_ctl = require("music_ctl")
+
+-- Separate additions
+require("mediakeys")
+require("ircnotify").setup_irc()
+bar.setup()
+
+
