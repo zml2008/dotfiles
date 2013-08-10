@@ -16,7 +16,7 @@ import stat
 LAUNCH_SCRIPT= \
 """#!/bin/sh
 DIR=$(dirname $0)
-pushd DIR
+pushd $DIR
 java -Xmx2G -jar {startfile}
 popd
 """
