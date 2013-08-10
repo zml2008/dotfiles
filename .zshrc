@@ -1,5 +1,4 @@
 # Variable definitions & assorted preferences
-[[ -z "$TMUX" ]] && exec tmux
 
 export PATH="$HOME/bin:$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION')/bin:$PATH"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
@@ -8,6 +7,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 autoload colors && colors
+
+
+[[ -z "$TMUX" ]] && exec tmx gen-base 1
 
 # Set the editor
 export VLESS=$(find /usr/share/vim -name 'less.sh')
