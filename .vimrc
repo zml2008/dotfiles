@@ -6,8 +6,7 @@ syntax enable
 execute pathogen#infect()
 
 " autocmd FileType markdown set spell
-set background=light
-colorscheme solarized
+set background=dark
 set expandtab
 set tabstop=4
 set shiftwidth=4
