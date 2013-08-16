@@ -144,5 +144,15 @@ widgets.battery = define(singleton_factory(function ()
             vicious.register(ret, vicious.widgets.bat, "$1$2", 63, "BAT0")
             return ret
         end))
+widgets.volume = define(singleton_factory(function ()
+    local pa = require("apw.widget")
+    pa:set_width(8)
+    pa:set_vertical(true)
+
+    local ticker = timer({timeout = 10})
+    ticker:connect_signal("timeout", pa.Update)
+    ticker:start()
+    return pa
+end))
 
 return widgets

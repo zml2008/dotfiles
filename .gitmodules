@@ -22,3 +22,6 @@
 [submodule ".config/awesome/irc"]
 	path = .config/awesome/irc
 	url = git://github.com/JakobOvrum/LuaIRC.git
+[submodule ".config/awesome/apw"]
+	path = .config/awesome/apw
+	url = https://github.com/mokasin/apw.git

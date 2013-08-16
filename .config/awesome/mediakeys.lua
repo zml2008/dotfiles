@@ -1,6 +1,6 @@
 local awful = require("awful")
 local keybindings = require("keybindings")
-local pa = require("pulseaudio.pulseaudio")
+local pa = require("apw.widget")
 
 
 keybindings.globalkeys(awful.util.table.join(
@@ -12,8 +12,8 @@ keybindings.globalkeys(awful.util.table.join(
 			awful.util.spawn("xbacklight -inc 5", false) 
 		end)) 
 	end),
-	awful.key({}, "XF86AudioMute", function () pulseaudio.volumeMute() end),
-	awful.key({}, "XF86AudioLowerVolume", function () pulseaudio.volumeDown() end),
-	awful.key({}, "XF86AudioRaiseVolume", function () pulseaudio.volumeUp() end),
+	awful.key({}, "XF86AudioMute", pa.ToggleMute),
+	awful.key({}, "XF86AudioLowerVolume", pa.Down),
+	awful.key({}, "XF86AudioRaiseVolume", pa.Up),
 	awful.key({}, "XF86Display", function () end)
 ))
