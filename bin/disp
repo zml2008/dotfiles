@@ -1,0 +1,111 @@
+#!/bin/bash
+set -e
+# Simple xrandr helper script
+# Usage:
+# disp off|left|right|up|down|clone [output] (of internal display)
+
+
+function error() {
+    echo $@ >&2
+    return 1
+}
+
+function get_connected() {
+    #echo "VGA1"
+    declare -a OUTPUTS
+    OUTPUTS=$(xrandr --query | awk "{ if (\$2 == \"connected\" && \$1 != \"$1\") {print \$1;}}")
+    if [ ${#OUTPUTS[@]} -gt 1 ]; then
+        error "Multiple connected outputs! Please specify one"
+    fi
+
+    if [ "${OUTPUTS}" = "" ]; then
+        error "No connected outputs!" || return 1
+    fi
+
+    echo ${OUTPUTS[0]}
+}
+
+function get_largest() {
+python - << EOF
+from __future__ import print_function
+import subprocess
+modes={}
+last_output=None
+for line in subprocess.check_output(["xrandr", "--query"]).splitlines():
+    line = line.decode("utf-8")
+    if not line.startswith(" "):
+        last_output = line.split(" ", 2)[0]
+        if not last_output in modes:
+            modes[last_output] = []
+    else:
+        mode = line.strip().split(" ", 2)[0].split("x")
+        if mode[1].endswith("i"):
+            continue
+        modes[last_output].append((int(mode[0]), int(mode[1])))
+
+outputs = "$@".split(" ")
+modes = dict(filter(lambda i: i[0] in outputs, modes.items()))
+
+widths = {}
+heights = {}
+for k, v in modes.items():
+    for w, h in v:
+        if not w in widths: widths[w] = []
+        if not h in heights: heights[h] = []
+        widths[w].append(k)
+        heights[h].append(k)
+widths = [i[0] for i in filter(lambda i: len(i[1]) == $#, widths.items())]
+heights = [i[0] for i in filter(lambda i: len(i[1]) == $#, heights.items())]
+
+allow_filter = lambda i: i[0] in widths or i[1] in heights
+
+allowed_pri = sorted(filter(allow_filter, modes["$1"]), key=lambda i: i[0] * i[1], reverse=True)
+allowed_res = sorted(filter(allow_filter, modes["$2"]), key=lambda i: i[0] * i[1], reverse=True)
+if len(allowed_pri) == 0 or len(allowed_res) == 0:
+    sys.exit(1)
+ret = "--mode %dx%d" % allowed_pri[0]
+if allowed_pri[0][0] > allowed_res[0][0] or allowed_pri[0][1] > allowed_res[0][1]:
+    ret += "--fb %dx%d" % allowed_res[0]
+else:
+    ret += " --output $2 --scale {0}x{1}".format(allowed_pri[0][0] / float(allowed_res[0][0]), allowed_pri[0][1] / float(allowed_res[0][1]))
+print(ret)
+EOF
+}
+
+MODE="--auto"
+SDISP="LVDS1"
+CONTROL_ARG=""
+[ -z "$2" ] && OUTPUT=$(get_connected $SDISP) || OUTPUT="$2"
+
+if [ $? -ne 0 ]; then
+    exit $?
+fi
+case $1 in
+    o|off)
+        MODE="--off"
+        CONTROL_ARG="--output $SDISP --auto --scale 1x1"
+        ;;
+    l|left)
+        CONTROL_ARG="--left-of $SDISP"
+        ;;
+    r|right)
+        CONTROL_ARG="--right-of $SDISP"
+        ;;
+    u|up)
+        CONTROL_ARG="--above $SDISP"
+        ;;
+    d|down)
+        CONTROL_ARG="--below $SDISP"
+        ;;
+    c|clone)
+        CONTROL_ARG="--same-as $SDISP"
+        MODE=`get_largest $OUTPUT $SDISP`
+        ;;
+    *)
+        if [ ! -z $1 ]; then
+            OUTPUT=$1
+        fi
+        MODE="--off"
+        ;;
+esac
+exec xrandr --output $OUTPUT $MODE --output $OUTPUT $CONTROL_ARG
