@@ -1,1 +1,11 @@
-java -jar ~/minecraft/minecraft.jar
+#!/bin/sh
+
+LAUNCHER="$HOME/minecraft/minecraft.jar"
+DL_URL="https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.jar"
+
+if [ ! -e "$LAUNCHER" ]; then
+    mkdir -p `dirname $LAUNCHER` > /dev/null
+    wget $DL_URL -O $LAUNCHER
+fi
+
+java -jar $LAUNCHER
