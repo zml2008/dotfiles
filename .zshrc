@@ -1,8 +1,6 @@
 # Variable definitions & assorted preferences
+. ~/.session
 
-export PATH="$HOME/bin:$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION')/bin:$PATH"
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -43,7 +41,6 @@ export VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi
-export EDITOR="/usr/bin/vim"
 # Source the aliases configuration
 . ~/.aliases
 
@@ -57,7 +54,6 @@ compinit
 # End of lines added by compinstall
 
 # SSH stuff
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 if [ -n "$SSH_CONNECTION" ]; then
     typeset -A POWERLINE_CONFIG
     POWERLINE_CONFIG=("common.dividers.left.soft" "<" "common.divders.left.hard" "" "common.dividers.right.soft" ">" "common.dividers.right.hard" "")    
