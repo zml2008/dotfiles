@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local vicious = require("vicious")
 local awful = require("awful")
 local beautiful = require("beautiful")
-
+--local window_mgmt = require("window_mgmt")
 
 local widgets = {}
 
@@ -36,7 +36,7 @@ local function create_vprogbar()
 end
 
 widgets.separator = define(singleton_factory(function (s)
-	return wibox.widget.textbox("")
+	return wibox.widget.textbox("  ")
 end))
 
 widgets.tasklist = define(function (s) return awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, 
@@ -112,7 +112,7 @@ widgets.cpu_monitor = define(singleton_factory(function ()
                     widgets[i]:set_value(args[i])
                 end
 
-                return "CPU: "
+                return "C "
             end, 3)
 
         return ret
@@ -120,7 +120,7 @@ widgets.cpu_monitor = define(singleton_factory(function ()
 widgets.ram_monitor = define(singleton_factory(function () 
         local ret = wibox.layout.fixed.horizontal()
         local tooltip = awful.tooltip({objects = {ret}})
-        ret:add(wibox.widget.textbox("RAM "))
+        ret:add(wibox.widget.textbox("R "))
 
         local graph = awful.widget.graph()
         graph:set_width(25)
@@ -152,7 +152,10 @@ widgets.volume = define(singleton_factory(function ()
     local ticker = timer({timeout = 10})
     ticker:connect_signal("timeout", pa.Update)
     ticker:start()
-    return pa
+    local layout = wibox.layout.fixed.horizontal()
+    layout:add(wibox.widget.textbox("V "))
+    layout:add(pa)
+    return layout
 end))
 
 return widgets

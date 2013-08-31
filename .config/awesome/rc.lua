@@ -1,7 +1,7 @@
 require("defines")
 
 local shiny = require("shiny")
-shiny.init("darkglass")
+shiny.init("zenburn")
 
 local utils = require("utils")
 
