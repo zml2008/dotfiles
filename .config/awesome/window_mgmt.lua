@@ -45,7 +45,7 @@ awful.rules.rules = {
     --{ rule = { class = "gimp" },
     -- properties = { floating = true } },
     { rule = { class = "st-256color" },
-        properties = { opacity = 1.0}
+        properties = { opacity = 0.8}
     },
 }
 
