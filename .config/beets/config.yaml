@@ -1,0 +1,12 @@
+directory: ~/music
+library: ~/music/.library.blb
+plugins: mpdupdate lyrics chroma lastgenre fetchart
+ignore: .DS_Store
+
+import:
+    move: yes
+
+mpdupdate:
+    host: localhost
+    port: 6600
+
