@@ -15,7 +15,7 @@ local window_mgmt = require("window_mgmt")
 
 -- Separate additions
 require("mediakeys")
-require("ircnotify").setup_irc()
+--require("ircnotify").setup_irc()
 bar.setup()
 
 
