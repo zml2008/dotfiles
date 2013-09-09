@@ -21,6 +21,6 @@ dex -e awesome -a &
 unagi &
 runonce mpd
 
-xautolock -locker lockscreen -corners "0+00"" -cornerdelay 1 &
+xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
 
 # vim: set filetype=sh :
