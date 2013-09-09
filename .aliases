@@ -10,6 +10,19 @@ alias usys="systemctl --user $*"
 # Useful directories
 alias cddb="cd ~/Dropbox/$*"
 
+# Open surf to a file
+function fsurf() {
+surf "file://$PWD/${1}"
+}
+
+# Pandoc aliases
+function pdfslide() {
+pandoc -t beamer "$1" -o "${1%.*}.pdf"
+}
+
+function slide() {
+pandoc -t slidy --mathjax -s "$1" -o "${1%.*}.html"
+}
 
 # Quick HTTP server
 server() {
