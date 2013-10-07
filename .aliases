@@ -11,17 +11,21 @@ alias usys="systemctl --user $*"
 alias cddb="cd ~/Dropbox/$*"
 
 # Open surf to a file
-function fsurf() {
+fsurf() {
 surf "file://$PWD/${1}"
 }
 
 # Pandoc aliases
-function pdfslide() {
+pdfslide() {
 pandoc -t beamer "$1" -o "${1%.*}.pdf"
 }
 
-function slide() {
+slide() {
 pandoc -t slidy --mathjax -s "$1" -o "${1%.*}.html"
+}
+
+mdpdf() {
+pandoc -V geometry:margin=1in -V geometry:top=0.5in "$1" -o "${1%.*}.pdf"
 }
 
 # Quick HTTP server
@@ -31,6 +35,16 @@ server() {
 
 diechromedie() {
     for proc in $(ps -aux | grep chrome | grep -v grep | awk '{ print $2}'); kill -9 $proc
+}
+
+clipboard-to() {
+if [ $# -lt 1 ]; then
+    echo "Not enough arguments. Usage: $0 <host>"
+    return 1
+fi
+
+HOST=$1
+xclip -o -selection clipboard | ssh $HOST xclip -i -selection clipboard -d $DISPLAY
 }
 
 if [ -e ~/.aliases.local ]; then
