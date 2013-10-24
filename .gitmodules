@@ -25,3 +25,6 @@
 [submodule ".config/awesome/apw"]
 	path = .config/awesome/apw
 	url = https://github.com/mokasin/apw.git
+[submodule ".vim/bundle/zenburn"]
+	path = .vim/bundle/zenburn
+	url = git://github.com/jnurmine/Zenburn.git
