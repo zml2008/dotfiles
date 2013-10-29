@@ -20,6 +20,10 @@ pushd $DIR
 java -Xmx2G -jar {startfile}
 popd
 """
+
+def urlopen(url):
+    return urllib2.urlopen(urllib2.Request(url, headers={"User-Agent": "Mozilla/5.0 (X11; Linux) AppleWebKit (KHTML, like Gecko) MinecraftUpdater/dev"}))
+
 def create_launcher(destdir, startfile):
     if not os.path.isdir(destdir):
         os.path.makedirs(destdir)
@@ -31,7 +35,7 @@ def create_launcher(destdir, startfile):
 def to_json(url):
     """Tries to load a url into json, handling both python 2 and 3 (oaky-ish)"""
     try:
-        conn = urllib2.urlopen(url)
+        conn = urlopen(url)
     except Exception as e:
         print("error w/", url)
         print(e)
@@ -96,6 +100,7 @@ updates = {
     "pex": (JenkinsBuildUpdater("http://pex-dev.cloudapp.net/job/PermissionsEx/lastSuccessfulBuild"), "plugins"),
     #CraftBukkits
     "cb-dev": (RawUrlUpdateHandler("http://dl.bukkit.org/latest-dev/craftbukkit.jar"), ""),
+    "cb-rb": (RawUrlUpdateHandler("http://dl.bukkit.org/latest-rb/craftbukkit.jar"), ""),
     "spigot": (JenkinsBuildUpdater("http://ci.md-5.net/job/Spigot/lastStableBuild"), "")
 }
 
@@ -148,7 +153,7 @@ if __name__ == "__main__":
             print("Unable to get URL for update", updatename)
             continue
 
-        conn = urllib2.urlopen(download_url)
+        conn = urlopen(download_url)
         dest_file = updatename + getfileext(conn.geturl())
         dest_path = os.path.join(args.basedir, update[1], dest_file)
 
