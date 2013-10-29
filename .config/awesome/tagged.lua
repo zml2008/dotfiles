@@ -69,6 +69,7 @@ function awful.tag.viewonly(target, sync_screens)
 end
 
 function tagged.init(tag_conf)
+    local added_s = {}
     for i, v in ipairs(tag_conf) do
         setmetatable(v, tag_mt)
         tagged.tag_props[v.name] = v
@@ -76,11 +77,19 @@ function tagged.init(tag_conf)
         tagged.tags[v.name] = tag_screens
         if type(v.screen) == "number" then
             tag_screens[v.screen] = awful.tag.add(v.name, v)
+            if not added_s[v.screen] then
+                tag_screens[v.screen].selected = true
+                added_s[v.screen] = true
+            end
         else
             local orig_screens = v.screen
             for _, s in ipairs(v.screen) do
                 v.screen = s
                 tag_screens[s] = awful.tag.add(v.name, v)
+                if not added_s[v.screen] then
+                    tag_screens[v.screen].selected = true
+                    added_s[v.screen] = true
+                end
             end
             v.screen = orig_screens
         end
