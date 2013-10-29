@@ -5,7 +5,7 @@ if [ -e "$PIDFILE" ] && kill -0 `cat "$PIDFILE"` &2> /dev/null; then
     return
 fi
 
-"$@" &
+"$*" &
 echo "$!" > $PIDFILE
 }
 
@@ -19,6 +19,7 @@ xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 nitrogen --restore
 dex -e awesome -a &
 unagi &
+xflux -z 97034
 runonce mpd
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
