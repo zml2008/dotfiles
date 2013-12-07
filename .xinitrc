@@ -11,7 +11,7 @@ fi
 echo $WM
 export _JAVA_AWT_WM_NOREPARENTING=1
 
-. ~/.xsession
+. ~/.xprofile
 
 exec $WM
 
