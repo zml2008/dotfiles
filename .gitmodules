@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/zenburn"]
 	path = .vim/bundle/zenburn
 	url = git://github.com/jnurmine/Zenburn.git
+[submodule "texmf/tex/latex/mla13"]
+	path = texmf/tex/latex/mla13
+	url = git://github.com/jackson13info/mla13.git
