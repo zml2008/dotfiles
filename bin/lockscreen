@@ -4,6 +4,7 @@ function hexchat_cmd () {
     pidof hexchat && gdbus call --session --dest org.hexchat.service --object-path /org/hexchat/Remote --method org.hexchat.plugin.Command "$@" > /dev/null
 }
 
+[[ -e $HOME/.nolock ]] && exit 0
 hexchat_cmd "allserv away" #Fortune of the away: $(fortune -s | tr '\n' ' ')"
 xset dpms force off
 slock
