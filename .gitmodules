@@ -1,33 +1,33 @@
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+[submodule "links/.vim/bundle/syntastic"]
+	path = links/.vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
-[submodule ".zsh/plugins/zsh-syntax-highlighting"]
-	path = .zsh/plugins/zsh-syntax-highlighting
+[submodule "links/.zsh/plugins/zsh-syntax-highlighting"]
+	path = links/.zsh/plugins/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule ".vim/bundle/vim-jinja"]
-	path = .vim/bundle/vim-jinja
+[submodule "links/.vim/bundle/vim-jinja"]
+	path = links/.vim/bundle/vim-jinja
 	url = git://github.com/lepture/vim-jinja.git
-[submodule ".vim/bundle/neocomplete"]
-	path = .vim/bundle/neocomplete
+[submodule "links/.vim/bundle/neocomplete"]
+	path = links/.vim/bundle/neocomplete
 	url = git://github.com/Shougo/neocomplete.vim.git
-[submodule ".vim/bundle/vim-afterimage"]
-	path = .vim/bundle/vim-afterimage
+[submodule "links/.vim/bundle/vim-afterimage"]
+	path = links/.vim/bundle/vim-afterimage
 	url = git://github.com/tpope/vim-afterimage.git
-[submodule ".vim/bundle/vim-eunuch"]
-	path = .vim/bundle/vim-eunuch
+[submodule "links/.vim/bundle/vim-eunuch"]
+	path = links/.vim/bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
-[submodule ".config/awesome/eminent"]
-	path = .config/awesome/eminent
+[submodule "links/.config/awesome/eminent"]
+	path = links/.config/awesome/eminent
 	url = git://git.glacicle.org/awesome/eminent.git
-[submodule ".config/awesome/irc"]
-	path = .config/awesome/irc
+[submodule "links/.config/awesome/irc"]
+	path = links/.config/awesome/irc
 	url = git://github.com/JakobOvrum/LuaIRC.git
-[submodule ".config/awesome/apw"]
-	path = .config/awesome/apw
+[submodule "links/.config/awesome/apw"]
+	path = links/.config/awesome/apw
 	url = https://github.com/mokasin/apw.git
-[submodule ".vim/bundle/zenburn"]
-	path = .vim/bundle/zenburn
+[submodule "links/.vim/bundle/zenburn"]
+	path = links/.vim/bundle/zenburn
 	url = git://github.com/jnurmine/Zenburn.git
-[submodule "texmf/tex/latex/mla13"]
-	path = texmf/tex/latex/mla13
+[submodule "links/texmf/tex/latex/mla13"]
+	path = links/texmf/tex/latex/mla13
 	url = git://github.com/jackson13info/mla13.git
