@@ -47,6 +47,10 @@ HOST=$1
 xclip -o -selection clipboard | ssh $HOST xclip -i -selection clipboard -d $DISPLAY
 }
 
+crapp() {
+    google-chrome-beta --app=$1
+}
+
 if [ -e ~/.aliases.local ]; then
     . ~/.aliases.local
 fi
