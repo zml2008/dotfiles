@@ -8,7 +8,6 @@ import json
 from os.path import *
 
 IGNORE_FILES = [
-        basename(__file__),
         "README"
         ]
 
