@@ -17,9 +17,6 @@
 	"segments": {
 		"left": [
 			{
-				"name": "hostname"
-			},
-			{
 				"name": "user"
 			},
 			{
