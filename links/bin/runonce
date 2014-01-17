@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PIDFILE="/tmp/runonce-$USER/${1}.pid"
+mkdir -p `dirname $PIDFILE`
+
+if [ -e "$PIDFILE" ] && kill -0 `cat "$PIDFILE"` 2> /dev/null && pgrep $1; then
+    exit 1
+fi
+
+$* &
+echo "$!" > $PIDFILE
