@@ -158,4 +158,10 @@ widgets.volume = define(singleton_factory(function ()
     return layout
 end))
 
+widgets.mpd = define(singleton_factory(function ()
+    local ret = wibox.widget.textbox()
+    vicious.register(ret, vicious.widgets.mpd, "${state} ${Title} - ${Artist}")
+    return ret
+end))
+
 return widgets

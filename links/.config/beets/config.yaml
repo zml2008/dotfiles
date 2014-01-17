@@ -1,6 +1,6 @@
 directory: ~/music
 library: ~/music/.library.blb
-plugins: mpdupdate lyrics chroma lastgenre fetchart
+plugins: mpdupdate lyrics lastgenre fetchart
 ignore: .DS_Store
 
 import:
