@@ -146,8 +146,8 @@ widgets.battery = define(singleton_factory(function ()
         end))
 widgets.volume = define(singleton_factory(function ()
     local pa = require("apw.widget")
-    pa:set_width(8)
-    pa:set_vertical(true)
+    pa.widget:set_width(8)
+    pa.widget:set_vertical(true)
 
     local ticker = timer({timeout = 10})
     ticker:connect_signal("timeout", pa.Update)
@@ -161,6 +161,33 @@ end))
 widgets.mpd = define(singleton_factory(function ()
     local ret = wibox.widget.textbox()
     vicious.register(ret, vicious.widgets.mpd, "${state} ${Title} - ${Artist}")
+    return ret
+end))
+
+widgets.newmail = define(singleton_factory(function ()
+    local lfs = require('lfs')
+    local ret = wibox.layout.fixed.horizontal()
+    local first = true
+    local root = os.getenv("HOME") .. "/mail"
+    for acc in lfs.dir(root) do
+        if not (acc == "." or acc == "..") then
+            if not first then
+                ret:add(widgets.separator())
+            end
+            first = false
+            local wid = wibox.widget.textbox()
+            vicious.register(wid, function (format, warg)
+                local count = 0
+                for i in lfs.dir(warg.. "/new") do
+                    if i ~= "." and i ~= ".." then
+                        count = count + 1
+                    end
+                end
+                return {count}
+            end, acc .. ": $1", 2, root.. "/" .. acc .. "/INBOX")
+            ret:add(wid)
+        end
+    end
     return ret
 end))
 

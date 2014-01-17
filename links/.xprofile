@@ -14,4 +14,5 @@ runonce mpd --no-daemon
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
 
+[ -e ~/.xprofile.local ] && . ~/.xprofile.local
 # vim: set filetype=sh :
