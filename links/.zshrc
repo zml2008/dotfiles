@@ -44,7 +44,7 @@ fi
 # Source the aliases configuration
 . ~/.aliases
 
-setopt autocd extendedglob
+setopt noautocd extendedglob
 # bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/zach/.zshrc'
