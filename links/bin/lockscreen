@@ -7,5 +7,5 @@ function hexchat_cmd () {
 [[ -e $HOME/.nolock ]] && exit 0
 hexchat_cmd "allserv away" #Fortune of the away: $(fortune -s | tr '\n' ' ')"
 xset dpms force off
-slock
+sxlock
 hexchat_cmd "allserv back"
