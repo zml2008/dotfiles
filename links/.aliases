@@ -34,7 +34,9 @@ server() {
 }
 
 diechromedie() {
-    for proc in $(ps -aux | grep chrome | grep -v grep | awk '{ print $2}'); kill -9 $proc
+    for proc in $(ps -aux | grep chrome | grep -v grep | awk '{ print $2}'); do
+        kill -9 $proc
+    done
 }
 
 clipboard-to() {
@@ -48,7 +50,7 @@ xclip -o -selection clipboard | ssh $HOST xclip -i -selection clipboard -d $DISP
 }
 
 crapp() {
-    google-chrome-beta --app=$1
+   chromium --app=$1
 }
 
 if [ -e ~/.aliases.local ]; then
