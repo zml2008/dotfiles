@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LAUNCHER="$HOME/minecraft/minecraft.jar"
+LAUNCHER="$HOME/.minecraft/launcher-launcher.jar"
 DL_URL="https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.jar"
 
 if [ ! -e "$LAUNCHER" ]; then
