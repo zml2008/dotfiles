@@ -3,8 +3,13 @@ local vicious = require("vicious")
 local awful = require("awful")
 local beautiful = require("beautiful")
 --local window_mgmt = require("window_mgmt")
+package.path = package.path .. ';/usr/lib/python2.7/site-packages/powerline/bindings/awesome/?.lua'
+require('powerline')
 
 local widgets = {}
+local function str_split(str)
+    return {str:match((str:gsub("[^ ]* ", "([^ ]*) ")))}
+end
 
 function widgets.define(create_func, buttons)
 	return function (...)
@@ -92,30 +97,15 @@ widgets.layoutbox = define(awful.widget.layoutbox, awful.util.table.join(
                        awful.button({ }, 4, function () awful.layout.inc(window_mgmt.layouts, 1) end),
                        awful.button({ }, 5, function () awful.layout.inc(window_mgmt.layouts, -1) end)))
 widgets.cpu_monitor = define(singleton_factory(function ()
-        local widgets = {}
-        local ret = wibox.layout.fixed.horizontal()
-        local sep_widget = wibox.widget.textbox(" ") -- we resue this a ton
-
         local label = wibox.widget.textbox()
-        ret:add(label)
-        vicious.register(label, vicious.widgets.cpu,
-            function (widget, args)
-                -- list only real cpu cores
-                for i=2,#args do
-                    -- get the graph to update (and stick in separator)
-                    if widgets[i] == nil then
-                        widgets[i] = create_vprogbar()
-                        widgets[i]:set_max_value(100)
-                        ret:add(sep_widget)
-                        ret:add(widgets[i])
-                    end
-                    widgets[i]:set_value(args[i])
-                end
+        vicious.register(label, function (format, warg)
+            local str = io.open("/proc/loadavg", 'r')
+            local line = str:read("*all")
+            str:close()
+            return str_split(line)
+        end, "$1 $2 $3", 3)
 
-                return "C "
-            end, 3)
-
-        return ret
+        return label
     end))
 widgets.ram_monitor = define(singleton_factory(function () 
         local ret = wibox.layout.fixed.horizontal()
