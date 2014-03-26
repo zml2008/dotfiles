@@ -39,7 +39,7 @@ diechromedie() {
     done
 }
 
-clipboard-to() {
+clipboardto() {
 if [ $# -lt 1 ]; then
     echo "Not enough arguments. Usage: $0 <host>"
     return 1
