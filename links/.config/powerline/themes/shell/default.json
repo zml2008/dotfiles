@@ -16,6 +16,13 @@
 	},
 	"segments": {
 		"left": [
+            {
+                "name": "date",
+                "args": {
+                    "istime": true,
+                    "format": "%H:%M:%S"
+                }
+            },
 			{
 				"name": "user"
 			},
