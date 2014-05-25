@@ -1,5 +1,6 @@
 local awful = require('awful')
 awful.rules = require('awful.rules')
+local naughty = require('naughty')
 local capi = {
     tag = tag,
     screen = screen,
@@ -28,8 +29,28 @@ local tagged = {
 
 -- Make input tags inherit from stuff we set above
 local tag_mt = {}
-function tag_mt:__index(item)
+function tag_mt.__index(t, item)
     return tagged.default_tag[item]
+end
+
+function tag_mt.__ipairs(t)
+    if t.in_iter then
+        return next, t, 0
+    end
+    t.in_iter = true
+    local new_t = awful.util.table.join(tagged.default_tag, t)
+    t.in_iter = false
+    return ipairs(new_t)
+end
+
+function tag_mt.__pairs(t)
+    if t.in_iter then
+        return next, t, nil
+    end
+    t.in_iter = true
+    local new_t = awful.util.table.join(tagged.default_tag, t)
+    t.in_iter = false
+    return pairs(new_t)
 end
 
 -- =============
@@ -68,7 +89,10 @@ function awful.tag.viewonly(target, sync_screens)
     end
 end
 
-function tagged.init(tag_conf)
+function tagged.init(tag_conf, default_layout)
+    if default_layout ~= nil then
+        tagged.default_tag.layout = default_layout
+    end
     local added_s = {}
     for i, v in ipairs(tag_conf) do
         setmetatable(v, tag_mt)
@@ -76,19 +100,23 @@ function tagged.init(tag_conf)
         local tag_screens = {}
         tagged.tags[v.name] = tag_screens
         if type(v.screen) == "number" then
-            tag_screens[v.screen] = awful.tag.add(v.name, v)
-            if not added_s[v.screen] then
-                tag_screens[v.screen].selected = true
-                added_s[v.screen] = true
+            if v.screen <= screen.count() then
+                tag_screens[v.screen] = awful.tag.add(v.name, v)
+                if not added_s[v.screen] then
+                    tag_screens[v.screen].selected = true
+                    added_s[v.screen] = true
+                end
             end
         else
             local orig_screens = v.screen
             for _, s in ipairs(v.screen) do
-                v.screen = s
-                tag_screens[s] = awful.tag.add(v.name, v)
-                if not added_s[v.screen] then
-                    tag_screens[v.screen].selected = true
-                    added_s[v.screen] = true
+                if s <= screen.count() then
+                    v.screen = s
+                    tag_screens[s] = awful.tag.add(v.name, v)
+                    if not added_s[v.screen] then
+                        tag_screens[v.screen].selected = true
+                        added_s[v.screen] = true
+                    end
                 end
             end
             v.screen = orig_screens

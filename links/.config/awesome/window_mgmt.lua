@@ -58,19 +58,16 @@ tagged.init({
     {
         name = "term",
         screen = screen.count() > 1 and 2 or 1,
-        layout = awful.layout.suit.tile.top,
     },
     {
         name = "media",
         screen = {1, 2},
         -- clone_on = 2,
-        layout = awful.layout.suit.fair,
     },
     {
         name        = "www",
         --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
         screen      = 1,
-        layout      = awful.layout.suit.max,      -- Use the max layout
     } ,
     {
         name = "comms",
@@ -84,7 +81,7 @@ tagged.init({
 --        sync_screens = true,
         layout      = awful.layout.suit.max,
     } ,
-})
+}, awful.layout.suit.fair)
 
 -- keybindings
 -- Keys that apply to all windows - these are the only keybindings directly applied in this file
