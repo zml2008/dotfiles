@@ -5,10 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ `command -v keychain` ]; then
-	eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
-fi
-
 export EDITOR=`command -v vim`
 shopt -s checkwinsize
 . ~/.aliases # Aliases file
