@@ -34,7 +34,7 @@ case "$TERM" in
          ;;
 esac
 
-[[ -z "$TMUX" ]] && exec tmx gen-base 1
+[[ -z "$TMUX" ]] && exec tmx gen-base
 
 # Set the editor
 export VLESS=$(find /usr/share/vim -name 'less.sh')
