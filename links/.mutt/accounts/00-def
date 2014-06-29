@@ -1,0 +1,19 @@
+# vim: set filetype=muttrc :
+set sendmail="msmtp -a $my_account"
+
+
+set mbox      = "+$my_account/[Gmail]/.All Mail"
+set postponed = "+$my_account/[Gmail]/.Drafts"
+set record = "+$my_account/[Gmail]/.Sent Mail"
+
+color status green default
+
+bind editor <space> noop
+macro index,pager y "<save-message>$mbox<enter><enter>" "Archive"
+macro index D \
+    "<save-message>+$my_account/[Gmail].Trash<enter>" \
+    "move message to the trash"
+
+macro index S \
+    "<save-message>+$my_account/[Gmail].Spam<enter>"  \
+        "mark message as spam"

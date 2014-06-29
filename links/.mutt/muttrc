@@ -1,0 +1,35 @@
+# Gmail config
+set mbox_type=Maildir
+set folder=~/mail
+source ~/.mutt/mailboxes
+set reverse_name=yes
+set delete=yes
+unset mark_old
+
+set pager_index_lines = 8
+set pager_context     = 5
+set pager_stop
+set menu_scroll
+set smart_wrap
+set tilde
+unset markers
+
+# Enable threading
+set sort=threads
+set strict_threads=yes
+set sort_aux="reverse-last-date-received"
+unset collapse_unread
+
+set sidebar_visible=yes
+set sidebar_width=30
+set sort_sidebar=path
+
+#source ~/.mutt/zenburn.theme
+#color body magenta default "^>.*"
+color body brightred default "^-.*"
+color body brightgreen default "^[+].*"
+color body brightwhite default "^diff .*"
+color body brightwhite default "^index [a-f0-9].*"
+color body brightyellow default "^@@.*"
+
+source ~/.mutt/accounts/list
