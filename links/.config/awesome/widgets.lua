@@ -91,11 +91,11 @@ widgets.taglist = define(function(s)
         )) end)
 widgets.systray = define(wibox.widget.systray)
 widgets.promptbox = define(function () return awful.widget.prompt() end)
-widgets.layoutbox = define(awful.widget.layoutbox, awful.util.table.join(
-                       awful.button({ }, 1, function () awful.layout.inc(window_mgmt.layouts, 1) end),
-                       awful.button({ }, 3, function () awful.layout.inc(window_mgmt.layouts, -1) end),
-                       awful.button({ }, 4, function () awful.layout.inc(window_mgmt.layouts, 1) end),
-                       awful.button({ }, 5, function () awful.layout.inc(window_mgmt.layouts, -1) end)))
+widgets.layoutbox = define(awful.widget.layoutbox)--, awful.util.table.join(
+                       --awful.button({ }, 1, function () awful.layout.inc(window_mgmt.layouts, 1) end),
+                       --awful.button({ }, 3, function () awful.layout.inc(window_mgmt.layouts, -1) end),
+                       --awful.button({ }, 4, function () awful.layout.inc(window_mgmt.layouts, 1) end),
+                       --awful.button({ }, 5, function () awful.layout.inc(window_mgmt.layouts, -1) end)))
 widgets.cpu_monitor = define(singleton_factory(function ()
         local label = wibox.widget.textbox()
         vicious.register(label, function (format, warg)
