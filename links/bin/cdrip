@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIRNAME="/tmp/cdrip-$RANDOM"
+
+mkdir $DIRNAME
+
+pushd $DIRNAME
+
+cdparanoia --batch
+
+for i in *.wav; do
+    ffmpeg -i $i ${i%.*}.flac
+    rm $i
+done
+
+beet import --flat .
+
+popd
+rm -r $DIRNAME
