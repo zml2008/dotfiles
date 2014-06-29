@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pgrep -f mbsync-watcher && exit 1
+pushd ~/mail/
+for i in *; do
+    #echo $i
+    mbsync-watcher $i ./$i "INBOX" "[Gmail]/All Mail" 2> /dev/null &
+done
+
+popd
