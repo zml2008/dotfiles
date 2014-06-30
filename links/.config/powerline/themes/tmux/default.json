@@ -25,10 +25,6 @@
 				"priority": 50
 			},
 			{
-				"name": "external_ip",
-				"priority": 50
-			},
-			{
 				"name": "network_load",
 				"priority": 50
 			},
@@ -45,10 +41,6 @@
 					"format": "%H:%M:%S",
 					"istime": true
 				}
-			},
-			{
-				"name": "email_imap_alert",
-				"priority": 10
 			},
 			{
 				"name": "hostname"
