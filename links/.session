@@ -1,7 +1,6 @@
 #!/bin/sh
-
 if [ `command -v keychain` ]; then
-    eval $(keychain --eval --agents ssh,gpg -Q --quiet --inherit any)
+    eval $(keychain --eval --agents ssh,gpg -Q --quiet id_rsa)
 fi
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION')/bin:$PATH"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
