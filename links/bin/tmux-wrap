@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SESSION_NAME=$1
+shift
+
+COMMAND=$*
+
+if [[ -z "$COMMAND" ]]; then
+    COMMAND=$SESSION_NAME
+fi
+PREFIX=""
+
+if [[ -n "$TERM" ]]; then
+    PREFIX="st -e"
+fi
+
+tmux_nb=$(tmux ls | grep "^$SESSION_NAME" | wc -l)
+if [[ "$tmux_nb" == "0" ]]; then
+    $PREFIX tmux new-session -s $SESSION_NAME $COMMAND
+else
+    $PREFIX tmux attach-session -t $SESSION_NAME
+fi
