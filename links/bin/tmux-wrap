@@ -9,8 +9,7 @@ if [[ -z "$COMMAND" ]]; then
     COMMAND=$SESSION_NAME
 fi
 PREFIX=""
-
-if [[ -n "$TERM" ]]; then
+if [[ "$TERM" == "dumb" ]]; then
     PREFIX="st -e"
 fi
 
