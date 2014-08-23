@@ -9,7 +9,6 @@ command -v powerline-daemon && powerline-daemon &
 nitrogen --restore
 dex -e awesome -a &
 unagi &
-xflux -z 97034
 runonce mpd --no-daemon
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &

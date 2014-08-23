@@ -44,14 +44,43 @@ fi
 # Source the aliases configuration
 . ~/.aliases
 
-setopt noautocd extendedglob
+setopt noautocd extendedglob completealiases HIST_IGNORE_DUPS
 # bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/zach/.zshrc'
+zstyle ':completion:*' rehash true
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# Dirstack via archwiki
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+    dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+    [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=20
+
+setopt autopushd pushdsilent pushdtohome
+
+## Remove duplicate entries
+setopt pushdignoredups
+
+### This reverts the +/- operators.
+setopt pushdminus
+
+# Help command via archwiki
+autoload -U run-help
+autoload run-help-git
+autoload run-help-svn
+autoload run-help-svk
+unalias run-help
+alias help=run-help
 
 # SSH stuff
 if [ -n "$SSH_CONNECTION" ]; then
@@ -64,7 +93,7 @@ if [ -e /usr/share/zsh/site-contrib/powerline.zsh ]; then
 . /usr/share/zsh/site-contrib/powerline.zsh
 export VIRTUAL_ENV_DISABLE_PROMPT="true"
 else
-    PS1="$fg[blue][\u@\h:$fg[yellow]\W$fg[blue]]$reset"
+    PS1="%*|$fg[blue][%n@%%m:$fg[yellow]%~$fg[blue]]>$reset_color"
 fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
