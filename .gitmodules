@@ -16,15 +16,6 @@
 [submodule "links/.vim/bundle/vim-eunuch"]
 	path = links/.vim/bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
-[submodule "links/.config/awesome/eminent"]
-	path = links/.config/awesome/eminent
-	url = git://git.glacicle.org/awesome/eminent.git
-[submodule "links/.config/awesome/irc"]
-	path = links/.config/awesome/irc
-	url = git://github.com/JakobOvrum/LuaIRC.git
-[submodule "links/.config/awesome/apw"]
-	path = links/.config/awesome/apw
-	url = https://github.com/mokasin/apw.git
 [submodule "links/.vim/bundle/zenburn"]
 	path = links/.vim/bundle/zenburn
 	url = git://github.com/jnurmine/Zenburn.git
