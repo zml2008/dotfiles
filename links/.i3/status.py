@@ -16,7 +16,7 @@ status.register("battery", not_present_text="", alert=True)
 
 mail_root = os.path.join(os.getenv("HOME"), "mail")
 for acc in os.listdir(mail_root):
-    status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=acc + ": {unread}")
+    status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=acc + ": {unread}", format_plural=acc + ": {unread}")
 
 status.register("now_playing", format="{status} {title} - {artist}")
 status.register("pulseaudio", format="♪: {db}dB")

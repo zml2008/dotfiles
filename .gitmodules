@@ -22,3 +22,12 @@
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
 	url = git://github.com/jackson13info/mla13.git
+[submodule "links/.vim/bundle/vim-airline"]
+	path = links/.vim/bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git
+[submodule "links/.vim/bundle/tmuxline.vim"]
+	path = links/.vim/bundle/tmuxline.vim
+	url = git@github.com:edkolev/tmuxline.vim.git
+[submodule "links/.vim/bundle/promptline.vim"]
+	path = links/.vim/bundle/promptline.vim
+	url = git@github.com:edkolev/promptline.vim.git

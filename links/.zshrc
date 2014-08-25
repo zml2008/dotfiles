@@ -87,13 +87,16 @@ if [ -n "$SSH_CONNECTION" ]; then
     typeset -A POWERLINE_CONFIG
     POWERLINE_CONFIG=("common.dividers.left.soft" "<" "common.divders.left.hard" "" "common.dividers.right.soft" ">" "common.dividers.right.hard" "")    
 fi
-
+export ZLE_RPROMPT_INDENT=0
 # Prompt fancification
-if [ -e /usr/share/zsh/site-contrib/powerline.zsh ]; then
-. /usr/share/zsh/site-contrib/powerline.zsh
-export VIRTUAL_ENV_DISABLE_PROMPT="true"
+vim -c "PromptlineSnapshot! ~/.zprompt.sh" -c ":q"
+if [ -e $HOME/.zprompt.sh ]; then # Generation successful
+    . $HOME/.zprompt.sh
 else
-    PS1="%*|$fg[blue][%n@%%m:$fg[yellow]%~$fg[blue]]>$reset_color"
+    MAIN_COLOR=%{$fg_bold[blue]%}
+    HL_COLOR=%{$fg[yellow]%}
+    RESET=%{$reset_color%}
+    PROMPT="%*|${MAIN_COLOR}[%n@%m:${HL_COLOR}%~${MAIN_COLOR}>${RESET}"
 fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
