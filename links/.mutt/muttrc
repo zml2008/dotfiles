@@ -20,10 +20,6 @@ set strict_threads=yes
 set sort_aux="reverse-last-date-received"
 unset collapse_unread
 
-set sidebar_visible=yes
-set sidebar_width=30
-set sort_sidebar=path
-
 set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain text/html
