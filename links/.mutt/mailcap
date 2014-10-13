@@ -1,1 +1,1 @@
-text/html; links -dump %s; copiousoutput
+text/html; w3m -I %{charset} -T text/html -dump; copiousoutput

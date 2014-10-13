@@ -4,7 +4,7 @@ if [ `command -v keychain` ]; then
 fi
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION')/bin:$PATH"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 export EDITOR="/usr/bin/vim"
 export TERMINAL="st -e tmx gen-base"
 

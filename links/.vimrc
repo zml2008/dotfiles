@@ -5,6 +5,7 @@ syntax enable
 " let g:pathogen_disabled = ["autoclose"]
 execute pathogen#infect()
 let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
 let g:promptline_preset = {
         \'a': [ '$(date +%H:%M:%S)'],
         \'b': [promptline#slices#user() ],
