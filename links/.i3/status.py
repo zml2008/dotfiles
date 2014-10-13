@@ -12,7 +12,7 @@ status.register("clock", format="%Y-%m-%d %H:%M:%S")
 
 status.register("load", format="{avg1} {avg5} {avg15}", critical_limit=4)
 
-status.register("battery", not_present_text="", alert=True)
+status.register("battery", not_present_text="", alert=False)
 
 mail_root = os.path.join(os.getenv("HOME"), "mail")
 for acc in os.listdir(mail_root):
