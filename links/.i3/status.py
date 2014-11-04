@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 import subprocess
 import os
 
@@ -8,6 +8,7 @@ from i3pystatus.mail import maildir
 
 status = Status(standalone=True)
 
+status.register("clock", format=[("UTC: %m-%d %H:%M:%S", "UTC")])
 status.register("clock", format="%Y-%m-%d %H:%M:%S")
 
 status.register("load", format="{avg1} {avg5} {avg15}", critical_limit=4)
