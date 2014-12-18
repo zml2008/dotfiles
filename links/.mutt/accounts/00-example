@@ -1,0 +1,12 @@
+# vim: set filetype=muttrc :
+set my_account="acc"
+set from="from"
+
+source ~/.mutt/accounts/00-def
+
+set mbox      = "+$my_account/Archive"
+set postponed = "+$my_account/Drafts"
+set record = "+$my_account/Sent"
+set my_trash = "+$my_account/Trash"
+set my_spam = "+$my_account/Spam"
+
