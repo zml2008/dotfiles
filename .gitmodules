@@ -31,3 +31,6 @@
 [submodule "links/.vim/bundle/promptline.vim"]
 	path = links/.vim/bundle/promptline.vim
 	url = git://github.com/edkolev/promptline.vim.git
+[submodule "links/.vim/bundle/rust.vim"]
+	path = links/.vim/bundle/rust.vim
+	url = https://github.com/wting/rust.vim.git
