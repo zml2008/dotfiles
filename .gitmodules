@@ -34,3 +34,6 @@
 [submodule "links/.vim/bundle/rust.vim"]
 	path = links/.vim/bundle/rust.vim
 	url = https://github.com/wting/rust.vim.git
+[submodule "links/.vim/bundle/salt-vim"]
+	path = links/.vim/bundle/salt-vim
+	url = https://github.com/saltstack/salt-vim.git
