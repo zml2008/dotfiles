@@ -1,5 +1,11 @@
 #!/bin/bash
 
+DETACH=""
+if [ "$1" = "-d" ]; then
+    DETACH="-Dd"
+    shift
+fi
+
 SESSION_NAME=$1
 shift
 
@@ -13,9 +19,4 @@ if [[ "$TERM" == "dumb" ]]; then
     PREFIX="st -e"
 fi
 
-tmux_nb=$(tmux ls | grep "^$SESSION_NAME" | wc -l)
-if [[ "$tmux_nb" == "0" ]]; then
-    $PREFIX tmux new-session -s $SESSION_NAME $COMMAND
-else
-    $PREFIX tmux attach-session -t $SESSION_NAME
-fi
+$PREFIX tmux new-session $DETACH -As $SESSION_NAME $COMMAND
