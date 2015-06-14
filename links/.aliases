@@ -1,6 +1,7 @@
 # Useful system commands
 alias svim="sudo vim $*"
 alias ls='ls --color=auto -c'
+alias p='sudo pacman'
 alias mkncd="mkdir -p $* && cd $*"
 alias mv="mv -v"
 alias cp="cp -v"
