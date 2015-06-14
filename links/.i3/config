@@ -39,6 +39,7 @@ workspace_auto_back_and_forth yes
 
 for_window [class="st-256color"] exec transset-df -a 0.8
 for_window [class="^jetbrains-idea$"] focus child, layout stacking, focus
+for_window [window_role="bubble"] floating enable
 
 # {{{ Keyboard shortcuts
 
