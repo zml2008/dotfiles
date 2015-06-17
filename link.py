@@ -29,7 +29,7 @@ class DotfileLinker(object):
         self.root_dir = root_dir
         self.target_dir = target_dir
         self.links_dir = join(root_dir, "links")
-        self.instance_name = dirname(root_dir)
+        self.instance_name = basename(abspath(root_dir))
         self.load()
         if ignore_files:
             self.ignore_files = ignore_files
@@ -90,6 +90,8 @@ class DotfileLinker(object):
 
 def main():
     sys.stdout.write("Linking symlinks... ")
+    print(__file__)
+    print(dirname(__file__))
     DotfileLinker(dirname(__file__)).link()
     sys.stdout.write("Done\n")
 
