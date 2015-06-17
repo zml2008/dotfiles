@@ -2,10 +2,16 @@ filetype plugin indent on
 au BufRead,BufNewFile *.md  set filetype=markdown
 syntax enable
 
+set background=light
+let base16colorspace=256
+let theme = system('base16-template-for vim vim')
+execute "source " . system('base16-template-for vim vim')
+let g:airline_theme='base16'
+
+
 " let g:pathogen_disabled = ["autoclose"]
 execute pathogen#infect()
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
 let g:promptline_preset = {
         \'a': [ '$(date +%H:%M:%S)'],
         \'b': [promptline#slices#user() ],
@@ -13,7 +19,6 @@ let g:promptline_preset = {
         \'y' : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ]}
 " autocmd FileType markdown set spell
-set background=dark
 set expandtab
 set tabstop=4
 set shiftwidth=4
