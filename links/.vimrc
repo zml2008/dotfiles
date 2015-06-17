@@ -2,7 +2,7 @@ filetype plugin indent on
 au BufRead,BufNewFile *.md  set filetype=markdown
 syntax enable
 
-set background=light
+set background=dark
 let base16colorspace=256
 let theme = system('base16-template-for vim vim')
 execute "source " . system('base16-template-for vim vim')

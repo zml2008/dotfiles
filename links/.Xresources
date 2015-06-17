@@ -5,3 +5,8 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 Xft.dpi: 96
+
+*.faceName: monospace
+*.faceSize: 9
+*.termName: xterm-256color
+xterm*eightBitInput: false
