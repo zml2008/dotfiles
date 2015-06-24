@@ -5,8 +5,9 @@ syntax enable
 set background=dark
 let base16colorspace=256
 let theme = system('base16-template-for vim vim')
-execute "source " . system('base16-template-for vim vim')
+execute "source " . theme
 let g:airline_theme='base16'
+let g:promptline_theme = 'airline'
 
 
 " let g:pathogen_disabled = ["autoclose"]
@@ -23,6 +24,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set number
+set cursorline
 set laststatus=2
 set encoding=utf-8
 
