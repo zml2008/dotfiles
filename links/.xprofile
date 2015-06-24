@@ -3,11 +3,11 @@ export _JAVA_AWT_WM_NOREPARENTING=1
 
 xhost local:boinc &
 xset r rate 220 &
-setxkbmap -layout us,us -variant dvorak, -option caps:escape -option compose:prsc -option terminate:ctrl_alt_bksp -option group:rctl_ralt_toggle
+setxkbmap -layout us,us -variant dvorak, -option caps:escape -option compose:prsc -option terminate:ctrl_alt_bksp -option grp:rctrl_ralt_toggle
 xmodmap -e 'keysym Scroll_Lock = XF86AudioPlay'
 xset -dpms
 
-command -v powerline-daemon && powerline-daemon &
+xrdb ~/.Xresources
 nitrogen --restore
 dex -e awesome -a &
 unagi &
