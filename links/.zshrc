@@ -19,7 +19,7 @@ case "$TERM" in
          ;;
 esac
 
-#[[ -z "$TMUX" ]] && exec tmx gen-base
+[[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
 
 # Set the editor
 export VLESS=$(find /usr/share/vim -name 'less.sh')
