@@ -8,7 +8,6 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -16,6 +15,9 @@ set $mod Mod4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:monospace 9
+
+client.focused  #ffffff #ffffff #555555 #2e9ef4
+client.focused_inactive  #eeeeee #eeeeee #444444 #2e9ef4
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -30,7 +32,7 @@ floating_modifier $mod
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command python ~/.i3/status.py
+        status_command ~/.i3/status.py
         tray_output primary
         binding_mode_indicator yes
 }
@@ -38,7 +40,8 @@ bar {
 workspace_auto_back_and_forth yes
 #rename workspace 1 to "1: www"
 
-for_window [class="st-256color"] exec transset-df -a 0.8
+for_window [class="termite"] exec transset-df -a 0.9
+for_window [class="glowing-bear.github.io__glowing-bear"] exec transset-df -a 0.95
 for_window [class="^jetbrains-idea$"] focus child, layout stacking, focus
 for_window [window_role="bubble"] floating enable
 
