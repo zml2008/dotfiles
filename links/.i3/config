@@ -16,15 +16,22 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:monospace 9
 
-client.focused  #ffffff #ffffff #555555 #2e9ef4
-client.focused_inactive  #eeeeee #eeeeee #444444 #2e9ef4
+set $focused_fg #222222
+set $focused_bg #eeeeee
+set $focused_inactive_fg #222222
+set $focused_inactive_bg #dddddd
+set $unfocused_fg #999999
+set $unfocused_bg #333333
+set $urgent_fg #ffffff
+set $urgent_bg #901010
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# colorclass border background text indicator
+# default indicator is #2e9ef4
+client.focused  $focused_bg $focused_bg $focused_fg $focused_inactive_bg
+client.focused_inactive $focused_inactive_bg $focused_inactive_bg $focused_inactive_fg $focused_bg
+client.unfocused $unfocused_bg $unfocused_bg $unfocused_fg $unfocused_bg
+client.urgent $urgent_bg $urgent_bg $urgent_fg $urgent_bg
+client.placeholder #000000 $focused_inactive_bg $focused_inactive_fg #000000
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -32,6 +39,16 @@ floating_modifier $mod
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        colors {
+            background #111111
+            #statusline $unfocused_fg
+
+            focused_workspace $focused_bg $focused_bg $focused_fg
+            active_workspace $focused_inactive_bg $focused_inactive_bg $focused_inactive_fg
+            inactive_workspace $unfocused_bg $unfocused_bg $unfocused_fg
+            urgent_workspace $urgent_bg $urgent_bg $urgent_fg
+        }
+
         status_command ~/.i3/status.py
         tray_output primary
         binding_mode_indicator yes
@@ -63,7 +80,7 @@ bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
 bindsym $mod+Shift+period kill
 
 # start dmenu (a program launcher)
-bindsym $mod+period exec dmenu_run # or exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+period exec --no-startup-id i3-dmenu-desktop
 
 # enter fullscreen mode for the focused container
 bindsym $mod+u fullscreen
