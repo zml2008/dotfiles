@@ -1,0 +1,82 @@
+#!/bin/sh
+
+USAGE=<<'END'
+Usages:
+    screenshot <type> [name]
+    screenshot [name]
+    screenshot
+if type is unspecified, type is `fullscreen`
+if name is unspecified, the current date & time (ISO format to the most recent second, in UTC) is used
+Valid types are:
+    `fullscreen`, `screen`, `all`, `a` -- Capturing the full screen
+    `selection`, `sel`, `s` -- Capture the current selection (just click to capture a single window)
+END
+
+print_usage() {
+    echo $USAGE
+}
+
+is_type() {
+    case "$1" in
+        fullscreen|screen|all|a|selection|sel|s)
+            return 0
+            ;;
+        *)
+            return 1
+    esac
+}
+
+STORAGE_DIR="${HOME}/screenshots/"
+if [ ! -d "$STORAGE_DIR" ]; then
+    mkdir -p $STORAGE_DIR
+fi
+
+TYPE="screen"
+NAME=`date -uIseconds`
+
+if [ $# -eq 1 ]; then
+    if [ "$1" = "help" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo $USAGE
+        exit 0
+    fi
+
+    if is_type "$1"; then
+        TYPE="$1"
+    else
+        NAME="$1"
+    fi
+elif [ $# -eq 2 ]; then
+    if ! is_type "$1"; then
+        echo "Invalid type '$1'."
+        print_usage
+        exit 1
+    fi
+    TYPE="$1"
+    NAME="$2"
+elif [ ! $# -eq 0 ]; then
+    echo "Invalid number of arguments"
+    print_usage
+    exit 1
+fi
+
+CMD="import "
+case "$TYPE" in
+    fullscreen|screen|all|a)
+        CMD+="-window root "
+        ;;
+    selection|sel|s)
+        CMD+="-frame -border "
+        ;;
+esac
+OUTFILE="${STORAGE_DIR}${NAME}.png"
+CMD+="$OUTFILE"
+eval $CMD || exit 2
+
+IPFS_HASH=$(ipfs add $OUTFILE | awk '{ print $2 }')
+GATEWAY_URL="https://gateway.ipfs.io/ipfs/${IPFS_HASH}"
+if [ -n "$DISPLAY" ]; then
+    echo $GATEWAY_URL | xclip -i -sel clipboard
+fi
+echo "$GATEWAY_URL"
+notify-send "Screenshot created" "Saved as $OUTFILE and link pasted to clipboard"
+
