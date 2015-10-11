@@ -43,3 +43,6 @@
 [submodule "links/.vim/bundle/YouCompleteMe"]
 	path = links/.vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "links/.vim/bundle/calendar.vim"]
+	path = links/.vim/bundle/calendar.vim
+	url = https://github.com/itchyny/calendar.vim
