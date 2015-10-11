@@ -27,6 +27,7 @@ set number
 set cursorline
 set laststatus=2
 set encoding=utf-8
+set autowrite
 
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
