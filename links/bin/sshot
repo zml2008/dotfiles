@@ -72,11 +72,29 @@ OUTFILE="${STORAGE_DIR}${NAME}.png"
 CMD+="$OUTFILE"
 eval $CMD || exit 2
 
-IPFS_HASH=$(ipfs add $OUTFILE | awk '{ print $2 }')
-GATEWAY_URL="https://gateway.ipfs.io/ipfs/${IPFS_HASH}"
+upload_ipfs() {
+    IPFS_HASH=$(ipfs add $1 | awk '{ print $2 }')
+    echo "https://gateway.ipfs.io/ipfs/${IPFS_HASH}"
+    return 0
+}
+
+IMGUR_CLIENT_ID="f0133f41c37ba53"
+upload_imgur() {
+    OUTPUT=$(curl -H "Authorization: Client-ID $IMGUR_CLIENT_ID" \
+        -Fimage=@${1} \
+        https://api.imgur.com/3/image)
+    if [ "$(echo $OUTPUT | jq '.success')" = "false" ]; then
+        echo "Error uploading to imgur: $(echo $OUTPUT | jq '.data.error')" 1>&2
+        return 1
+    fi
+    echo $(echo $OUTPUT | jq -r '.data.link')
+    return 0
+}
+
+OUTPUT_URL=$(upload_imgur $OUTFILE || exit 2)
 if [ -n "$DISPLAY" ]; then
-    echo $GATEWAY_URL | xclip -i -sel clipboard
+    echo $OUTPUT_URL | xclip -i -sel clipboard
 fi
-echo "$GATEWAY_URL"
+echo "$OUTPUT_URL"
 notify-send "Screenshot created" "Saved as $OUTFILE and link pasted to clipboard"
 
