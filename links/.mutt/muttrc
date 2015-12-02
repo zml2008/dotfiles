@@ -6,6 +6,11 @@ set reverse_name=yes
 set delete=yes
 unset mark_old
 
+# Multiple addresses going to one account
+set use_envelope_from
+set reverse_name
+set reverse_realname
+
 set pager_index_lines = 8
 set pager_context     = 5
 set pager_stop
