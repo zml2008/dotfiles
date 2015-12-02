@@ -46,3 +46,6 @@
 [submodule "links/.vim/bundle/calendar.vim"]
 	path = links/.vim/bundle/calendar.vim
 	url = https://github.com/itchyny/calendar.vim
+[submodule "links/makefile-templates"]
+	path = links/makefile-templates
+	url = git@github.com:zml2008/makefile-templates.git
