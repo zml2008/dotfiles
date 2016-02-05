@@ -26,6 +26,8 @@ export VLESS=$(find /usr/share/vim -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi
+
+command -v thefuck > /dev/null && eval $(thefuck -a)
 # Source the aliases configuration
 . ~/.aliases
 

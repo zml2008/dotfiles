@@ -5,6 +5,7 @@ OUTPUT="$HOME/.lockbg.png"
 
 if [ $# -lt 1 ]; then
     echo "Not enough arguments! Usage: $0 <input-image>"
+    exit 1
 fi
 
 convert -monitor -blur 60x30 -resize $WIDTH $1 $OUTPUT
