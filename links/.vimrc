@@ -32,6 +32,12 @@ set autowrite
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 if exists("loaded_less")
 " put something in the powerline!
 endif
