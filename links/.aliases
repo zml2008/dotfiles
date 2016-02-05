@@ -6,6 +6,13 @@ alias mkncd="mkdir -p $* && cd $*"
 alias mv="mv -v"
 alias cp="cp -v"
 
+# Git aliases
+alias g="git"
+alias gc="git commit $*"
+alias gp="git pull --rebase"
+alias gs="git stash"
+alias gsp="git stash pop"
+
 # Systemd
 alias sys="sudo systemctl $*"
 alias usys="systemctl --user $*"
