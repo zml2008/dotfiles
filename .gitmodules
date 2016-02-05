@@ -49,3 +49,9 @@
 [submodule "links/makefile-templates"]
 	path = links/makefile-templates
 	url = git@github.com:zml2008/makefile-templates.git
+[submodule "links/.vim/bundle/kotlin-vim"]
+	path = links/.vim/bundle/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
+[submodule "links/.vim/bundle/vim-easy-align"]
+	path = links/.vim/bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
