@@ -55,3 +55,6 @@
 [submodule "links/.vim/bundle/vim-easy-align"]
 	path = links/.vim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "links/.vim/bundle/vim-airline-themes"]
+	path = links/.vim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
