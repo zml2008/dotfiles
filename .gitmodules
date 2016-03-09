@@ -64,3 +64,6 @@
 [submodule "links/.vim/bundle/vison"]
 	path = links/.vim/bundle/vison
 	url = https://github.com/Quramy/vison.git
+[submodule "links/.vim/bundle/vim-latex"]
+	path = links/.vim/bundle/vim-latex
+	url = https://github.com/vim-latex/vim-latex.git
