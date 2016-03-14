@@ -67,3 +67,6 @@
 [submodule "links/.vim/bundle/vim-latex"]
 	path = links/.vim/bundle/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
+[submodule "links/.vim/bundle/vimwiki"]
+	path = links/.vim/bundle/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
