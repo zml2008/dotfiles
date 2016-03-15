@@ -2,7 +2,6 @@
 alias svim="sudo vim $*"
 alias ls='ls --color=auto -c'
 alias p='sudo pacman'
-alias mkncd="mkdir -p $* && cd $*"
 alias mv="mv -v"
 alias cp="cp -v"
 
@@ -20,6 +19,13 @@ alias usys="systemctl --user $*"
 # Useful directories
 alias cddb="cd ~/Dropbox/$*"
 
+mkncd() {
+    if [[ ! -e "$1" ]]; then
+        mkdir -p $1
+    fi
+    cd $1
+}
+
 # Open surf to a file
 fsurf() {
 surf "file://$PWD/${1}"
@@ -35,7 +41,7 @@ pandoc -t slidy --mathjax -s "$1" -o "${1%.*}.html"
 }
 
 mdpdf() {
-pandoc -V geometry:margin=1in -V geometry:top=0.5in "$1" -o "${1%.*}.pdf"
+pandoc -V geometry:margin=1in -V geometry:top=0.5in "$1" -o "${1%.*}.pdf" --filter pandoc-citeproc
 }
 
 # Quick HTTP server

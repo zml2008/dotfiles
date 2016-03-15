@@ -8,6 +8,7 @@ let theme = system('base16-template-for vim vim')
 execute "source " . theme
 let g:airline_theme='base16'
 let g:promptline_theme = 'airline'
+set background=dark
 
 
 " let g:pathogen_disabled = ["autoclose"]
@@ -17,6 +18,7 @@ let g:promptline_preset = {
         \'a': [ '$(date +%H:%M:%S)'],
         \'b': [promptline#slices#user() ],
         \'c': [ promptline#slices#cwd() ],
+        \'x': [promptline#slices#python_virtualenv()],
         \'y' : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ]}
 " autocmd FileType markdown set spell
@@ -31,6 +33,8 @@ set autowrite
 
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+
+let g:vimwiki_list = [{'path': '~/sync/notes/', 'path_html': '~/sync/notes_html'}]
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
