@@ -1,5 +1,5 @@
 # Useful system commands
-alias svim="sudo vim $*"
+alias svim="sudo nvim $*"
 alias ls='ls --color=auto -c'
 alias p='sudo pacman'
 alias mv="mv -v"
