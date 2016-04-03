@@ -76,7 +76,7 @@ if [ -n "$SSH_CONNECTION" ]; then
 fi
 export ZLE_RPROMPT_INDENT=0
 # Prompt fancification
-vim -c "PromptlineSnapshot! ~/.zprompt.sh" -c ":q"
+nvim -c "PromptlineSnapshot! ~/.zprompt.sh" -c ":q"
 if [ -e $HOME/.zprompt.sh ]; then # Generation successful
     . $HOME/.zprompt.sh
 else
