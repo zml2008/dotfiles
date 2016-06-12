@@ -28,7 +28,7 @@
 # THE SOFTWARE.
 
 """
-ConqueScreen is an extention of the vim.current.buffer object
+ConqueScreen is an extension of the vim.current.buffer object
 
 Unix terminal escape sequences usually reference line numbers relative to the 
 top of the visible screen. However the visible portion of the Vim buffer

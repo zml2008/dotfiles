@@ -335,7 +335,7 @@ mode.
 3.2.4 Execute current file in Conque                  *ConqueTerm_ExecFileKey*
 
 Press this key to execute the file you're currently editing in a Conque
-buffer. Is equivelent to running the command :ConqueTermSplit YOUR_FILE. Your
+buffer. Is equivalent to running the command :ConqueTermSplit YOUR_FILE. Your
 file must be executable for this command to work correctly.
 >
     let g:ConqueTerm_ExecFileKey = '<F11>'

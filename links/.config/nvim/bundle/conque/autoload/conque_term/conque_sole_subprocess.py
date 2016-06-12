@@ -422,7 +422,7 @@ class ConqueSoleSubprocess():
 
 
     def reset_console(self, buf_info, add_block=True):
-        """ Extend the height of the current console if the cursor postion gets within 200 lines of the current size. """
+        """ Extend the height of the current console if the cursor position gets within 200 lines of the current size. """
 
         # sometimes we just want to change the buffer width,
         # in which case no need to add another block
