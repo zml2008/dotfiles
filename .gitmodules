@@ -73,3 +73,6 @@
 [submodule "links/.config/nvim/bundle/vim-nix"]
 	path = links/.config/nvim/bundle/vim-nix
 	url = https://github.com/LnL7/vim-nix.git
+[submodule "links/.config/nvim/bundle/vim-json"]
+	path = links/.config/nvim/bundle/vim-json
+	url = https://github.com/elzr/vim-json.git

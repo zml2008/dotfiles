@@ -42,6 +42,8 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+let g:ycm_rust_src_path = "/opt/rust/src"
+
 if exists("loaded_less")
 " put something in the powerline!
 endif
