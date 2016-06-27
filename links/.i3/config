@@ -67,6 +67,12 @@ for_window [window_role="bubble"] floating enable
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# Rotate display
+bindsym Mod3+Mod1+Left exec xrandr -o left
+bindsym Control+Alt+right exec xrandr -o right
+bindsym Control+Alt+up exec xrandr -o normal
+bindsym Control+Alt+down exec xrandr -o inverted
+
 # {{{ Media keys
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
