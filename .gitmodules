@@ -76,3 +76,6 @@
 [submodule "links/.config/nvim/bundle/vim-json"]
 	path = links/.config/nvim/bundle/vim-json
 	url = https://github.com/elzr/vim-json.git
+[submodule "links/.steam/skins/HiDPI-Steam-Skin"]
+	path = links/.steam/steam/skins/HiDPI-Steam-Skin
+	url = https://github.com/MoriTanosuke/HiDPI-Steam-Skin.git
