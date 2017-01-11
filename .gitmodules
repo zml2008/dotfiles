@@ -79,3 +79,9 @@
 [submodule "links/.steam/skins/HiDPI-Steam-Skin"]
 	path = links/.steam/steam/skins/HiDPI-Steam-Skin
 	url = https://github.com/MoriTanosuke/HiDPI-Steam-Skin.git
+[submodule "links/.config/nvim/bundle/vim-toml"]
+	path = links/.config/nvim/bundle/vim-toml
+	url = https://github.com/cespare/vim-toml.git
+[submodule "links/.config/nvim/bundle/Nvim-R"]
+	path = links/.config/nvim/bundle/Nvim-R
+	url = https://github.com/jalvesaq/Nvim-R.git
