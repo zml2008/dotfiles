@@ -16,14 +16,28 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:monospace 9
 
-set $focused_fg #222222
-set $focused_bg #eeeeee
-set $focused_inactive_fg #222222
-set $focused_inactive_bg #dddddd
+
+# set $focused_fg #191B1D
+# set $focused_bg #79AFC7
+# set $focused_inactive_fg #152C3F
+# set $focused_inactive_bg #728EA5
+# set $unfocused_fg #212121
+# set $unfocused_bg #BAC0C1
+# set $urgent_fg #FFFFFF
+# set $urgent_bg #900000
+# set $bar_bg #92BFC9
+# set $bar_fg #0B3943
+
+set $focused_fg #F9F9F9
+set $focused_bg #8F4F4F
+set $focused_inactive_fg #D7D7D7
+set $focused_inactive_bg #9F7272
 set $unfocused_fg #999999
-set $unfocused_bg #333333
-set $urgent_fg #ffffff
-set $urgent_bg #901010
+set $unfocused_bg #3B2929
+set $urgent_fg #FFFFFF
+set $urgent_bg #744E8F
+set $bar_bg #2F0303
+set $bar_fg #FFFFFF
 
 # colorclass border background text indicator
 # default indicator is #2e9ef4
@@ -40,8 +54,8 @@ floating_modifier $mod
 # finds out, if available)
 bar {
         colors {
-            background #111111
-            #statusline $unfocused_fg
+            background $bar_bg
+            statusline $bar_fg
 
             focused_workspace $focused_bg $focused_bg $focused_fg
             active_workspace $focused_inactive_bg $focused_inactive_bg $focused_inactive_fg
@@ -49,7 +63,7 @@ bar {
             urgent_workspace $urgent_bg $urgent_bg $urgent_fg
         }
 
-        status_command ~/.i3/status.py
+        status_command python ~/.i3/status.py
         tray_output primary
         binding_mode_indicator yes
 }
@@ -57,7 +71,7 @@ bar {
 workspace_auto_back_and_forth yes
 #rename workspace 1 to "1: www"
 
-for_window [class="termite"] exec transset-df -a 0.9
+for_window [class="Termite"] exec transset-df -a 0.8
 for_window [class="glowing-bear.github.io__glowing-bear"] exec transset-df -a 0.95
 for_window [class="^jetbrains-idea$"] focus child, layout stacking, focus
 for_window [window_role="bubble"] floating enable

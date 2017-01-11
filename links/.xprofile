@@ -1,6 +1,7 @@
 . ~/.session
 export _JAVA_AWT_WM_NOREPARENTING=1
 
+[ -e ~/.xprofile.local ] && . ~/.xprofile.local
 xhost local:boinc &
 xset r rate 220 &
 setxkbmap -layout us,us -variant dvorak, -option caps:escape -option compose:prsc -option terminate:ctrl_alt_bksp -option grp:rctrl_ralt_toggle
@@ -11,10 +12,9 @@ xrdb ~/.Xresources
 nitrogen --restore
 dex -e awesome -a &
 unagi &
-runonce mpd --no-daemon
+runonce mopidy
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
 udiskie --tray &
 
-[ -e ~/.xprofile.local ] && . ~/.xprofile.local
 # vim: set filetype=sh :

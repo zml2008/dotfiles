@@ -26,6 +26,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set number
+set relativenumber " do numbering relative to current line
 set cursorline
 set laststatus=2
 set encoding=utf-8
@@ -41,6 +42,8 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+let g:tex_flavor='latex'
 
 let g:ycm_rust_src_path = "/opt/rust/src"
 

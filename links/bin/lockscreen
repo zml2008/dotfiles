@@ -5,10 +5,19 @@ function hexchat_cmd () {
 }
 
 [[ -e $HOME/.nolock ]] && exit 0
+
+revert() {
+    xset dpms 0 0 0
+}
+trap revert SIGHUP SIGINT SIGTERM
+xset +dpms dpms 5 5 5
+xset dpms force off
+
 #hexchat_cmd "allserv away" #Fortune of the away: $(fortune -s | tr '\n' ' ')"
 if [ -e "$HOME/.lockbg.png" ]; then
-    i3lock -d -i "$HOME/.lockbg.png" -I 10
+    i3lock -i "$HOME/.lockbg.png" -I 10 -n
 else
-    i3lock -d -c 000000 -I 10
+    i3lock -c 000000 -I 10 -n
 fi
+revert
 #hexchat_cmd "allserv back"
