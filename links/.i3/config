@@ -142,12 +142,12 @@ bindsym $mod+j layout toggle split
 
 
 # switch to workspace
-bindsym $mod+1 workspace number 1: www
-bindsym $mod+2 workspace number 2: term
-bindsym $mod+3 workspace number 3: irc
-bindsym $mod+4 workspace number 4: music
-bindsym $mod+5 workspace number 5: dev
-bindsym $mod+6 workspace number 6: games
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
