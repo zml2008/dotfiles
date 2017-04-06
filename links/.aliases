@@ -1,7 +1,7 @@
 # Useful system commands
 alias svim="sudo nvim $*"
 alias ls='ls --color=auto -c'
-alias p='sudo pacman'
+alias p='pacaur'
 alias mv="mv -v"
 alias cp="cp -v"
 
@@ -55,6 +55,10 @@ pandoc -t slidy --mathjax -s "$1" -o "${1%.*}.html"
 
 mdpdf() {
 pandoc -V geometry:margin=1in -V geometry:top=0.5in "$1" -o "${1%.*}.pdf" --filter pandoc-citeproc
+}
+
+aria2-cli() {
+DIANA_SECRET_TOKEN=$(cat $HOME/.config/aria2/aria2.conf| grep rpc-secret  | tail -c '+12') diana $*
 }
 
 # Quick HTTP server
