@@ -60,8 +60,10 @@ status.register("load", format="{avg1} {avg5} {avg15}", critical_limit=4)
 status.register("battery", not_present_text="", alert=False)
 
 mail_root = os.path.join(os.getenv("HOME"), "mail")
-for acc in os.listdir(mail_root):
-    status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=acc + ": {unread}", format_plural=acc + ": {unread}")
+if os.path.isdir(mail_root):
+    for acc in os.listdir(mail_root):
+        if os.path.isdir(os.path.join(mail_root, acc, "INBOX")):
+            status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=acc + ": {unread}", format_plural=acc + ": {unread}")
 
 status.register("now_playing", format="{status} {title} - {artist}")
 status.register("pulseaudio", format="{muted}: {db}dB", unmuted="♪")

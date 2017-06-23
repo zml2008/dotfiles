@@ -11,7 +11,7 @@ xset -dpms
 xrdb ~/.Xresources
 nitrogen --restore
 dex -e awesome -a &
-unagi &
+#unagi &
 runonce mopidy
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &

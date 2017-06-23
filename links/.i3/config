@@ -16,6 +16,8 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:monospace 9
 
+hide_edge_borders smart
+
 
 # set $focused_fg #191B1D
 # set $focused_bg #79AFC7
@@ -100,7 +102,7 @@ bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
 bindsym $mod+Shift+period kill
 
 # start dmenu (a program launcher)
-bindsym $mod+period exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+period exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -nb $bar_bg -nf $bar_fg -sb $focused_bg -sf $focused_fg'
 
 # enter fullscreen mode for the focused container
 bindsym $mod+u fullscreen

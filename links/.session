@@ -4,7 +4,7 @@ if [ `command -v keychain` ]; then
 fi
 
 if [ `command -v ruby` ]; then
-    PATH="$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION')/bin:$PATH"
+    PATH="$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION[0..2]').0/bin:$PATH"
 fi
 
 if [ -e "$HOME/.cabal/bin" ]; then
