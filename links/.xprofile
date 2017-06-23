@@ -1,6 +1,6 @@
 . ~/.session
 export _JAVA_AWT_WM_NOREPARENTING=1
-
+expoct QT_QPA_PLATFORMTHEME=gtk2
 [ -e ~/.xprofile.local ] && . ~/.xprofile.local
 xhost local:boinc &
 xset r rate 220 &
@@ -16,5 +16,7 @@ runonce mopidy
 
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
 udiskie --tray &
+
+termite --role=scratchpad &
 
 # vim: set filetype=sh :

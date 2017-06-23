@@ -14,7 +14,7 @@ set $mod Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:monospace 9
+font pango:monospace 8
 
 hide_edge_borders smart
 
@@ -65,7 +65,7 @@ bar {
             urgent_workspace $urgent_bg $urgent_bg $urgent_fg
         }
 
-        status_command python ~/.i3/status.py
+        status_command python3 ~/.i3/status.py
         tray_output primary
         binding_mode_indicator yes
 }
@@ -77,8 +77,14 @@ for_window [class="Termite"] exec transset-df -a 0.8
 for_window [class="glowing-bear.github.io__glowing-bear"] exec transset-df -a 0.95
 for_window [class="^jetbrains-idea$"] focus child, layout stacking, focus
 for_window [window_role="bubble"] floating enable
+for_window [window_role="scratchpad"] move scratchpad
+
+bindsym $mod+minus scratchpad show
 
 # {{{ Keyboard shortcuts
+
+# open action dialog
+bindsym button9 --whole-window exec "touch ~/.actionmenu/toggle"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -174,7 +180,7 @@ bindsym $mod+Shift+p restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+dead_acute exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# }}}
+# }}} 
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
