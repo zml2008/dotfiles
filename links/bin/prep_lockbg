@@ -8,5 +8,5 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-convert -monitor -blur 60x30 -resize $WIDTH $1 $OUTPUT
+convert -monitor -blur 120x60 -resize $WIDTH $1 $OUTPUT
     

@@ -1,7 +1,4 @@
 #!/bin/sh
-if [ `command -v keychain` ]; then
-    eval $(keychain --eval --inherit any --agents ssh,gpg -Q --quiet id_rsa id_ed25519)
-fi
 
 if [ `command -v ruby` ]; then
     PATH="$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION[0..2]').0/bin:$PATH"

@@ -13,7 +13,7 @@ for i in *.wav; do
     rm $i
 done
 
-beet import --flat .
+#beet import --flat .
 
 popd
-rm -r $DIRNAME
+#rm -r $DIRNAME
