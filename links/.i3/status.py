@@ -19,7 +19,7 @@ class NoLockIndicator(IntervalModule):
     path = '~/.nolock'
     status = {
             'locked': '☕',
-            'unlocked': 'O'
+            'unlocked': '⚪'
             }
     status_color = {
             'locked': '#ff0000'
@@ -52,22 +52,27 @@ class NoLockIndicator(IntervalModule):
 
 status = Status(standalone=True)
 
+status.register("text", text="")
 status.register("clock", format=[("UTC: %m-%d %H:%M:%S", "UTC")])
-status.register("clock", format="%Y-%m-%d %H:%M:%S")
+status.register("clock", format="⏰ %Y-%m-%d %H:%M:%S")
 
-status.register("load", format="{avg1} {avg5} {avg15}", critical_limit=4)
-status.register("temp")
+status.register("load", format="🔥 {avg1} {avg5} {avg15}", critical_limit=4)
+status.register("temp", format="🌡️ {temp} °C")
 
-status.register("battery", not_present_text="", alert=False)
+status.register("battery", format="🔋 {status} {remaining}", not_present_text="", alert=False)
 
 mail_root = os.path.join(os.getenv("HOME"), "mail")
 if os.path.isdir(mail_root):
     for acc in os.listdir(mail_root):
         if os.path.isdir(os.path.join(mail_root, acc, "INBOX")):
-            status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=acc + ": {unread}", format_plural=acc + ": {unread}")
+            status.register("mail", backends=[maildir.MaildirMail(directory=os.path.join(mail_root, acc, "INBOX"))], format=" 📧 " + acc + ": {unread}", format_plural=acc + ": {unread}")
 
-status.register("now_playing", format="{status} {title} - {artist}")
-status.register("pulseaudio", format="{muted}: {db}dB", unmuted="♪")
+status.register("now_playing", format="{status} {title} - {artist}", status={
+    "pause": "⏸️",
+    "play": "▶️",
+    "stop": "⏹️"
+    })
+status.register("pulseaudio", format="{muted}: {db}dB", unmuted="🔊", muted="🔈")
 
 status.register(NoLockIndicator())
 
