@@ -6,6 +6,11 @@ import os
 from i3pystatus import Status, IntervalModule
 from i3pystatus.mail import maildir
 
+try:
+    import lifxlan
+except ImportError:
+    lifxlan = False
+
 
 class NoLockIndicator(IntervalModule):
     interval = 2
@@ -49,6 +54,96 @@ class NoLockIndicator(IntervalModule):
             with open(pathname, 'w'):
                 pass
 
+from concurrent.futures import ThreadPoolExecutor
+import concurrent.futures
+
+class LightController(IntervalModule):
+    interval = 10
+    reset_every = 3
+    prefix = "💡"
+
+    settings = (
+            ('group_name', 'The name of the group of lights to toggle with this switch'),
+            ('hide_on_no_lights', 'If true, hide this status item if no lights are on the local network. Otherwise, show an error'),
+            ('brightness_increment', 'The portion of brightness to change per single scroll wheel click, from 0 to 1')
+            )
+
+    group_name = "Bedroom"
+    hide_on_no_lights=True
+    brightness_increment = .05
+
+    on_leftclick='toggle_lights'
+    on_upscroll='brightness_up'
+    on_downscroll='brightness_down'
+
+    def update_all_lights(self, func_get, func_apply):
+        lights = self.__lights.get_lights()
+        futures = []
+        for light in lights:
+            fut = self.executor.submit(func_get, light)
+            fut._light = light
+            futures.append(fut)
+        done, not_done =  concurrent.futures.wait(futures)
+        futures = []
+        for fut in done:
+            futures.append(self.executor.submit(func_apply, fut.result(), fut._light))
+        concurrent.futures.wait(futures)
+        #for light in self.__lights.get_lights():
+        #    data = func_get(light)
+        #    func_apply(data, light)
+
+
+    def _light_toggle_internal(self, existing_power, light):
+        if existing_power == 0:
+            light.set_power(True, rapid=True)
+        else:
+            light.set_power(False, rapid=True)
+
+    def toggle_lights(self):
+        self.update_all_lights(lambda l: l.get_power(), self._light_toggle_internal)
+
+    def _adjust_brightness_internal(self, light, existing_state, increment):
+        h, s, b, k = existing_state
+        b = min(65535, max(0, b + (increment * 65535)))
+        light.set_color([h, s, b, k])
+
+    def brightness_up(self):
+        self.update_all_lights(lambda l: l.get_color(), lambda d, l: self._adjust_brightness_internal(l, d, self.brightness_increment))
+
+    def brightness_down(self):
+        self.update_all_lights(lambda l: l.get_color(), lambda d, l: self._adjust_brightness_internal(l, d, self.brightness_increment * -1))
+
+    def init(self):
+        self.__lights = lifxlan.LifxLAN()
+        num_lights = len(self.__lights.get_lights())
+        self.reset_counter = 0
+        self.executor = ThreadPoolExecutor()
+
+    def run(self):
+        if not lifxlan:
+            raise Error("Module lifxlan is required!")
+        if len(self.__lights.lights) is 0 and self.hide_on_no_lights:
+            self.output = {
+                    "full_text": ""
+                    }
+            return
+        if self.reset_counter >= self.reset_every:
+            self.__lights.discover_devices()
+            self.reset_counter = 0
+        else:
+            self.reset_counter += 1
+
+        light_brightnesses = {l.get_color()[2] / 65535 * 100 for l in self.__lights.get_lights()}
+
+        if sum(light_brightnesses) > 0:
+            self.output = {
+                    "full_text": "{prefix} {brightnesses}".format(prefix = self.prefix, brightnesses=" ".join(["{:.0f}%".format(brightness) for brightness in light_brightnesses]))
+                    }
+        else:
+            self.output = {
+                    "full_text": self.prefix
+                    }
+
 
 status = Status(standalone=True)
 
@@ -75,5 +170,6 @@ status.register("now_playing", format="{status} {title} - {artist}", status={
 status.register("pulseaudio", format="{muted}: {db}dB", unmuted="🔊", muted="🔈")
 
 status.register(NoLockIndicator())
+status.register(LightController())
 
 status.run()
