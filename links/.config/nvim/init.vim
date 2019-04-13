@@ -4,8 +4,8 @@ syntax enable
 
 set background=dark
 let base16colorspace=256
-let theme = system('base16-template-for vim vim')
-execute "source " . theme
+"let theme = system('base16-template-for vim vim')
+"execute "source " . theme
 let g:airline_theme='base16'
 let g:promptline_theme = 'airline'
 set background=dark
