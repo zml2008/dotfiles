@@ -6,7 +6,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 autoload colors && colors
 
-. $(base16-template-for shell sh)
 case "$TERM" in
     st-256color)
         function zle-line-init () { echoti smkx }
