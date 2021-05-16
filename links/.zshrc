@@ -33,7 +33,7 @@ command -v thefuck > /dev/null && eval $(thefuck -a)
 setopt noautocd extendedglob completealiases HIST_IGNORE_DUPS
 # bindkey -e
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/zach/.zshrc'
+zstyle :compinstall filename '/home/zml/.zshrc'
 zstyle ':completion:*' rehash true
 
 autoload -Uz compinit
@@ -87,6 +87,7 @@ fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES[cursor]='underline,fg=magenta'
 
 # Intro message
 echo -e "$fg[magenta]$(fortune -s | cowsay -s -W60)$reset_color"
