@@ -17,6 +17,6 @@ runonce mopidy
 xautolock -locker lockscreen -corners "0+00" -cornerdelay 1 &
 udiskie --tray &
 
-termite --role=scratchpad &
+alacritty --class=scratchpad &
 
 # vim: set filetype=sh :

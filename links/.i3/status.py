@@ -122,7 +122,7 @@ class LightController(IntervalModule):
     def run(self):
         if not lifxlan:
             raise Error("Module lifxlan is required!")
-        if len(self.__lights.lights) is 0 and self.hide_on_no_lights:
+        if len(self.__lights.lights) == 0 and self.hide_on_no_lights:
             self.output = {
                     "full_text": ""
                     }
@@ -170,6 +170,6 @@ status.register("now_playing", format="{status} {title} - {artist}", status={
 status.register("pulseaudio", format="{muted}: {db}dB", unmuted="🔊", muted="🔈")
 
 status.register(NoLockIndicator())
-status.register(LightController())
+# status.register(LightController())
 
 status.run()

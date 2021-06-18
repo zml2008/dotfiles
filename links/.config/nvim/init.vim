@@ -12,7 +12,7 @@ execute pathogen#infect()
 let g:airline_powerline_fonts = 1
 let g:promptline_preset = {
         \'a': [ '$(date +%H:%M:%S)'],
-        \'b': [promptline#slices#user() ],
+        \'b': [ promptline#slices#user() ],
         \'c': [ promptline#slices#cwd() ],
         \'x': [promptline#slices#python_virtualenv()],
         \'y' : [ promptline#slices#vcs_branch() ],
