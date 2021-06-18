@@ -85,3 +85,6 @@
 [submodule "links/.config/nvim/bundle/Nvim-R"]
 	path = links/.config/nvim/bundle/Nvim-R
 	url = https://github.com/jalvesaq/Nvim-R.git
+[submodule "links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim"]
+	path = links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
