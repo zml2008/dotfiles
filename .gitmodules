@@ -88,3 +88,9 @@
 [submodule "links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim"]
 	path = links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "links/.local/share/nvim/site/pack/dotfiles/start/riv.vim"]
+	path = links/.local/share/nvim/site/pack/dotfiles/start/riv.vim
+	url = https://github.com/gu-fan/riv.vim
+[submodule "links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim"]
+	path = links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim
+	url = https://github.com/drewtempelmeyer/palenight.vim
