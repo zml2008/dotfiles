@@ -2,6 +2,7 @@ filetype plugin indent on
 au BufRead,BufNewFile *.md  set filetype=markdown
 syntax enable
 
+packloadall
 " let g:pathogen_disabled = ["autoclose"]
 execute pathogen#infect()
 
