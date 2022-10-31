@@ -1,36 +1,36 @@
 [submodule "links/.config/nvim/bundle/syntastic"]
 	path = links/.config/nvim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
 [submodule "links/.zsh/plugins/zsh-syntax-highlighting"]
 	path = links/.zsh/plugins/zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "links/.config/nvim/bundle/vim-jinja"]
 	path = links/.config/nvim/bundle/vim-jinja
-	url = git://github.com/lepture/vim-jinja.git
+	url = https://github.com/lepture/vim-jinja.git
 [submodule "links/.config/nvim/bundle/neocomplete"]
 	path = links/.config/nvim/bundle/neocomplete
-	url = git://github.com/Shougo/neocomplete.vim.git
+	url = https://github.com/Shougo/neocomplete.vim.git
 [submodule "links/.config/nvim/bundle/vim-afterimage"]
 	path = links/.config/nvim/bundle/vim-afterimage
-	url = git://github.com/tpope/vim-afterimage.git
+	url = https://github.com/tpope/vim-afterimage.git
 [submodule "links/.config/nvim/bundle/vim-eunuch"]
 	path = links/.config/nvim/bundle/vim-eunuch
-	url = git://github.com/tpope/vim-eunuch.git
+	url = https://github.com/tpope/vim-eunuch.git
 [submodule "links/.config/nvim/bundle/zenburn"]
 	path = links/.config/nvim/bundle/zenburn
-	url = git://github.com/jnurmine/Zenburn.git
+	url = https://github.com/jnurmine/Zenburn.git
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
-	url = git://github.com/jackson13info/mla13.git
+	url = https://github.com/jackson13info/mla13.git
 [submodule "links/.config/nvim/bundle/vim-airline"]
 	path = links/.config/nvim/bundle/vim-airline
-	url = git://github.com/bling/vim-airline.git
+	url = https://github.com/bling/vim-airline.git
 [submodule "links/.config/nvim/bundle/tmuxline.vim"]
 	path = links/.config/nvim/bundle/tmuxline.vim
-	url = git://github.com/edkolev/tmuxline.vim.git
+	url = https://github.com/edkolev/tmuxline.vim.git
 [submodule "links/.config/nvim/bundle/promptline.vim"]
 	path = links/.config/nvim/bundle/promptline.vim
-	url = git://github.com/edkolev/promptline.vim.git
+	url = https://github.com/edkolev/promptline.vim.git
 [submodule "links/.config/nvim/bundle/rust.vim"]
 	path = links/.config/nvim/bundle/rust.vim
 	url = https://github.com/wting/rust.vim.git
@@ -39,7 +39,7 @@
 	url = https://github.com/saltstack/salt-vim.git
 [submodule "links/.config/nvim/bundle/vim-gitgutter"]
 	path = links/.config/nvim/bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "links/.config/nvim/bundle/YouCompleteMe"]
 	path = links/.config/nvim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
@@ -48,7 +48,7 @@
 	url = https://github.com/itchyny/calendar.vim
 [submodule "links/makefile-templates"]
 	path = links/makefile-templates
-	url = git@github.com:zml2008/makefile-templates.git
+	url = https://github.com/zml2008/makefile-templates.git
 [submodule "links/.config/nvim/bundle/kotlin-vim"]
 	path = links/.config/nvim/bundle/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
