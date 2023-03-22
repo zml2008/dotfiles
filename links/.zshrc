@@ -18,6 +18,8 @@ case "$TERM" in
          ;;
 esac
 
+[ -e $HOME/.zshrc.local ] && . $HOME/.zshrc.local
+
 [[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
 
 # Set the editor
