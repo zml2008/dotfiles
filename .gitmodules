@@ -94,3 +94,6 @@
 [submodule "links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim"]
 	path = links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim
 	url = https://github.com/drewtempelmeyer/palenight.vim
+[submodule "links/.zsh/plugins/zsh-autosuggestions"]
+	path = links/.zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

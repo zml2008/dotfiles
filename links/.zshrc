@@ -23,7 +23,7 @@ esac
 [[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
 
 # Set the editor
-export VLESS=$(find /usr/share/nvim -name 'less.sh')
+export VLESS=$(find $(dirname $(which nvim))/../share/nvim/runtime/ -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi
@@ -32,11 +32,13 @@ command -v thefuck > /dev/null && eval $(thefuck -a)
 # Source the aliases configuration
 . ~/.aliases
 
-setopt noautocd extendedglob completealiases HIST_IGNORE_DUPS
-# bindkey -e
+setopt noautocd chasedots nobeep extendedglob completealiases HIST_IGNORE_DUPS
+bindkey -v
+export INSERT_MODE_INDICATOR="%F{yellow}+%f"
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/zml/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' menu select
 
 autoload -Uz compinit
 compinit
@@ -90,6 +92,7 @@ fi
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[cursor]='underline,fg=magenta'
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Intro message
 echo -e "$fg[magenta]$(fortune -s | cowsay -s -W60)$reset_color"

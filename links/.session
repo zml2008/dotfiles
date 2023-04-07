@@ -16,7 +16,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-export EDITOR="/usr/bin/nvim"
+export EDITOR="$(which nvim)"
 export TERMINAL='termite'
 export BROWSER="xdg-open"
 
