@@ -1,6 +1,8 @@
 #!/bin/sh
 
-if [ -n "$DISPLAY" ]; then
+if [ "$(uname)" = "Darwin" ]; then
+    exec /opt/homebrew/bin/pinentry-mac $*
+elif [ -n "$DISPLAY" ]; then
     exec pinentry-curses $*
 else
     exec pinentry-gtk-2 $*

@@ -18,6 +18,7 @@ alias gp!="git push -f $*"
 alias gpr="git pull --rebase"
 alias gst="git stash"
 alias gstp="git stash pop"
+alias gsp="git stash pop"
 
 # Systemd
 alias sys="sudo systemctl $*"

@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+from argparse import ArgumentParser
+import sys
+from urllib.request import urlopen
+from xml.dom.minidom import parse as parse_xml, Element
+
+def _setup_args() -> ArgumentParser:
+    parser = ArgumentParser(description="Query versions of an artifact from a maven repository")
+    parser.add_argument("group")
+    parser.add_argument("artifact")
+    parser.add_argument("-r", "--repository", default="https://repo1.maven.org/maven2/")
+    parser.add_argument("-l", "--latest", action="store_true")
+    return parser
+
+
+def _fetch_versions(repo: str, group: str, artifact: str):
+    if repo.endswith('/'):
+        repo = repo[:-1]
+    req_url = f"{repo}/{group.replace('.', '/')}/{artifact}/maven-metadata.xml"
+
+    with urlopen(req_url) as response:
+        doc = parse_xml(response)
+        versioning = doc.getElementsByTagName("versioning")[0]
+        versions = versioning.getElementsByTagName("versions")[0]
+        return ["".join([e.nodeValue for e in i.childNodes]) for i in versions.childNodes if isinstance(i, Element)]
+
+    return []
+
+
+def main(args: list[str]) -> int:
+    # mvnversions.py [-r url] [-l|--latest] group artifact
+    params = _setup_args().parse_args(args)
+    print(f"Fetching versions for {params.group}:{params.artifact} from {params.repository}")
+    versions = _fetch_versions(params.repository, params.group, params.artifact)
+    if len(versions) == 0:
+        print("! No versions available!")
+        return 1
+    if params.latest:
+        print(f"> Latest version is: {versions[-1]}")
+    else:
+        for version in versions:
+            print(f"> {version}")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

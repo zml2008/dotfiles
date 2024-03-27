@@ -20,10 +20,10 @@ esac
 
 [ -e $HOME/.zshrc.local ] && . $HOME/.zshrc.local
 
-[[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
+[[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && tty -s && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
 
 # Set the editor
-export VLESS=$(find $(dirname $(which nvim))/../share/nvim/runtime/ -name 'less.sh')
+# export VLESS=$(find $(dirname $(which nvim))/../share/nvim/runtime/ -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi

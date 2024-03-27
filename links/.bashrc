@@ -30,3 +30,5 @@ if [ -e "$POWERLINE_PATH" ]; then
 else
 	PS1="${C_PRIMARY}[\u@\h:${C_PWD}\W${C_PRIMARY}]${C_PROMPT_RESET}» "
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

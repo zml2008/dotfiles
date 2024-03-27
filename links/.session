@@ -8,17 +8,31 @@ if [ -e "$HOME/.cabal/bin" ]; then
     PATH="$HOME/.cabal/bin:$PATH"
 fi
 
+_OS="`uname`"
+
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 export PATH
-
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+if [ $_OS = "Darwin" ]; then # macOS
+    export BROWSER="open"
+    if [ -z "$HOMEBREW_PREFIX" ] && [ -e "/opt/homebrew/" ]; then
+        # Setup homebrew
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
+        export HOMEBREW_NO_ENV_HINTS=1
+        export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
+    fi
+    export EDITOR="$(which nvim)"
+else # linux?
+    export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+    export EDITOR="/usr/bin/nvim"
+    export TERMINAL='termite'
+    export BROWSER="xdg-open"
+fi
+
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-export EDITOR="$(which nvim)"
-export TERMINAL='termite'
-export BROWSER="xdg-open"
 
 export ENV="$HOME/.session"
 export BASH_ENV=$ENV
