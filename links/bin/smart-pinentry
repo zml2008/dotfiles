@@ -2,7 +2,9 @@
 
 if [ "$(uname)" = "Darwin" ]; then
     exec /opt/homebrew/bin/pinentry-mac $*
-elif [ -n "$DISPLAY" ]; then
+elif [ -n "$KDE_SESSION_UID" ]; then
+    exec pinentry-qt $*
+elif [ -z "$DISPLAY" ]; then
     exec pinentry-curses $*
 else
     exec pinentry-gtk-2 $*
