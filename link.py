@@ -82,7 +82,10 @@ class DotfileLinker(object):
         # Remove any dead links we manage
         for k, v in self.known_links.items():
             if not k in created_links:
-                os.unlink(v)
+                try:
+                    os.unlink(v)
+                except:
+                    pass
 
         self.known_links = created_links
         self.save()

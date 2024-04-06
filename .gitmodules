@@ -94,3 +94,9 @@
 [submodule "links/.zsh/plugins/zsh-autosuggestions"]
 	path = links/.zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "links/.locale/share/tkthemes"]
+	path = links/.locale/share/tkthemes
+	url = https://github.com/thindil/tkBreeze.git
+[submodule "links/.local/share/tkthemes"]
+	path = links/.local/share/tkthemes
+	url = https://github.com/thindil/tkBreeze.git

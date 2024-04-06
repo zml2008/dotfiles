@@ -10,3 +10,4 @@ Xft.dpi: 96
 *.faceSize: 9
 *.termName: xterm-256color
 xterm*eightBitInput: false
+*TkTheme:breeze-dark

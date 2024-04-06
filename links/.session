@@ -26,10 +26,11 @@ if [ $_OS = "Darwin" ]; then # macOS
     fi
     export EDITOR="$(which nvim)"
 else # linux?
-    export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+    # export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
     export EDITOR="/usr/bin/nvim"
-    export TERMINAL='termite'
+    # export TERMINAL='termite'
     export BROWSER="xdg-open"
+    export TCLLIBPATH="$HOME/.local/share/tkthemes/"
 fi
 
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
