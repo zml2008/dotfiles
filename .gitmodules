@@ -16,21 +16,12 @@
 [submodule "links/.config/nvim/bundle/vim-eunuch"]
 	path = links/.config/nvim/bundle/vim-eunuch
 	url = https://github.com/tpope/vim-eunuch.git
-[submodule "links/.config/nvim/bundle/zenburn"]
-	path = links/.config/nvim/bundle/zenburn
-	url = https://github.com/jnurmine/Zenburn.git
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
 	url = https://github.com/jackson13info/mla13.git
-[submodule "links/.config/nvim/bundle/vim-airline"]
-	path = links/.config/nvim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
 [submodule "links/.config/nvim/bundle/tmuxline.vim"]
 	path = links/.config/nvim/bundle/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim.git
-[submodule "links/.config/nvim/bundle/promptline.vim"]
-	path = links/.config/nvim/bundle/promptline.vim
-	url = https://github.com/edkolev/promptline.vim.git
 [submodule "links/.config/nvim/bundle/rust.vim"]
 	path = links/.config/nvim/bundle/rust.vim
 	url = https://github.com/wting/rust.vim.git
@@ -55,9 +46,6 @@
 [submodule "links/.config/nvim/bundle/vim-easy-align"]
 	path = links/.config/nvim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "links/.config/nvim/bundle/vim-airline-themes"]
-	path = links/.config/nvim/bundle/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes.git
 [submodule "links/.config/nvim/bundle/unite.vim"]
 	path = links/.config/nvim/bundle/unite.vim
 	url = https://github.com/Shougo/unite.vim.git
@@ -82,15 +70,6 @@
 [submodule "links/.config/nvim/bundle/Nvim-R"]
 	path = links/.config/nvim/bundle/Nvim-R
 	url = https://github.com/jalvesaq/Nvim-R.git
-[submodule "links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim"]
-	path = links/.local/share/nvim/site/pack/dotfiles/start/editorconfig-vim
-	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule "links/.local/share/nvim/site/pack/dotfiles/start/riv.vim"]
-	path = links/.local/share/nvim/site/pack/dotfiles/start/riv.vim
-	url = https://github.com/gu-fan/riv.vim
-[submodule "links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim"]
-	path = links/.local/share/nvim/site/pack/dotfiles/start/palenight.vim
-	url = https://github.com/drewtempelmeyer/palenight.vim
 [submodule "links/.zsh/plugins/zsh-autosuggestions"]
 	path = links/.zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
@@ -100,3 +79,6 @@
 [submodule "links/.local/share/tkthemes"]
 	path = links/.local/share/tkthemes
 	url = https://github.com/thindil/tkBreeze.git
+[submodule "links/.config/nvim/lazy.nvim"]
+	path = links/.local/share/nvim/lazy/lazy.nvim
+	url = https://github.com/folke/lazy.nvim

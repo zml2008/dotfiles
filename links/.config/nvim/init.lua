@@ -7,7 +7,20 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 vim.cmd.syntax('enable')
 
-vim.cmd.packloadall()
+-- Setup plugin loading
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "drewtempelmeyer/palenight.vim" },
+    { "editorconfig/editorconfig-vim" },
+    { "vim-airline/vim-airline" },
+    { "vim-airline/vim-airline-themes" },
+    { "edkolev/tmuxline.vim" },
+    { "edkolev/promptline.vim" }
+}, { performance = { rtp = { reset = false }}})
+
 -- let g:pathogen_disabled = ["autoclose"]
 vim.fn['pathogen#infect']()
 
