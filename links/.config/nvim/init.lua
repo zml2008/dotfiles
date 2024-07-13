@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
         vim.o.filetype = 'markdown'
     end
 })
-vim.cmd.syntax('enable')
+-- vim.cmd.syntax('enable')
 
 -- Styling
 if vim.fn.has("termguicolors") then
@@ -38,7 +38,134 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    {
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp"
+    },
+    { "saadparwaiz1/cmp_luasnip"},
+    {
+        "hrsh7th/nvim-cmp",
+        setup = function()
+            local luasnip = require 'luasnip'
+            local cmp = require 'cmp'
+            cmp.setup {
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+                    ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+                    -- C-b (back) C-f (forward) for snippet placeholder navigation.
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<CR>'] = cmp.mapping.confirm {
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    },
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                }),
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" }
+                }
+            }
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
+            })
+        end
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "markdown_inline",
+                                     "bash", "toml", "json", "json5", "jsonc", "yaml", "xml", "python",
+                                     "kotlin", "java", "latex", "groovy",
+                                     "typescript", "css", "html",
+                                     "r", "d", "nix", "git_config", "git_rebase"
+                                 },
+                highlight = { enable = true },
+                indent = { enable = true }
+            }
+        end
+    },
+    { url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git"},
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            local lspconfig = require'lspconfig'
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local plain_servers = {
+                'bashls',
+                'clangd',
+                'esbonio',
+                'gradle_ls',
+                'jdtls',
+                'jsonls',
+                'marksman',
+                'texlab',
+                'ltex',
+                'pkgbuild_language_server',
+                'r_language_server',
+                'yamlls'
+            }
+            for _, lsp in ipairs(plain_servers) do
+                lspconfig[lsp].setup { capabilities = capabilities }
+            end
+            lspconfig.lua_ls.setup {
+                capabilites = capabilities,
+                on_init = function(client)
+                    -- setup to work with vim's world
+                    local path = client.workspace_folders[1].name
+                    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+                        return
+                    end
+
+                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                        runtime = {
+                            version = 'LuaJIT'
+                        },
+                        -- Make the server aware of Neovim runtime files
+                        workspace = {
+                            library = {
+                                vim.env.VIMRUNTIME
+                            }
+                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                            -- library = vim.api.nvim_get_runtime_file("", true)
+                        }
+                    })
+                end,
+                settings = {
+                    Lua = {}
+                }
+            }
+        end
+    },
     { "editorconfig/editorconfig-vim" },
     { "lewis6991/gitsigns.nvim", config = function()
           require('gitsigns').setup()
@@ -52,6 +179,7 @@ require("lazy").setup({
             {"ga", "<Plug>(EasyAlign)", mode = {"x", "n"}},
         }
     },
+    { "udalov/kotlin-vim" },
     -- appearence
     {
         "drewtempelmeyer/palenight.vim",
@@ -94,26 +222,10 @@ require("lazy").setup({
     { "tpope/vim-eunuch" },
     { dir = vim.fn.stdpath("config") .. "/plugins/autoclose" }
 }, {
-    performance = { rtp = { reset = false }}
 })
-
--- let g:pathogen_disabled = ["autoclose"]
-vim.fn['pathogen#infect']()
-
-vim.g.calendar_google_calendar = 1
-vim.g.calendar_google_task = 1
-
-vim.g.vimwiki_list = {{path = '~/sync/notes/', path_html = '~/sync/notes_html'}}
-
--- Syntastic options
-vim.g.syntastic_always_populate_loc_list = 1
-vim.g.syntastic_auto_loc_list = 1
-vim.g.syntastic_check_on_open = 1
-vim.g.syntastic_check_on_wq = 0
 
 if vim.g.loaded_less ~= nil then
 -- put something in the powerline!
 end
 
 vim.g.tex_flavor = 'latex'
-vim.g.ycm_rust_src_path = "/opt/rust/src"

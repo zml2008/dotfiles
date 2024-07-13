@@ -1,45 +1,12 @@
 [submodule "links/.zsh/plugins/zsh-syntax-highlighting"]
 	path = links/.zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "links/.config/nvim/bundle/vim-jinja"]
-	path = links/.config/nvim/bundle/vim-jinja
-	url = https://github.com/lepture/vim-jinja.git
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
 	url = https://github.com/jackson13info/mla13.git
-[submodule "links/.config/nvim/bundle/rust.vim"]
-	path = links/.config/nvim/bundle/rust.vim
-	url = https://github.com/wting/rust.vim.git
-[submodule "links/.config/nvim/bundle/salt-vim"]
-	path = links/.config/nvim/bundle/salt-vim
-	url = https://github.com/saltstack/salt-vim.git
 [submodule "links/makefile-templates"]
 	path = links/makefile-templates
 	url = https://github.com/zml2008/makefile-templates.git
-[submodule "links/.config/nvim/bundle/kotlin-vim"]
-	path = links/.config/nvim/bundle/kotlin-vim
-	url = https://github.com/udalov/kotlin-vim
-[submodule "links/.config/nvim/bundle/vison"]
-	path = links/.config/nvim/bundle/vison
-	url = https://github.com/Quramy/vison.git
-[submodule "links/.config/nvim/bundle/vim-latex"]
-	path = links/.config/nvim/bundle/vim-latex
-	url = https://github.com/vim-latex/vim-latex.git
-[submodule "links/.config/nvim/bundle/vimwiki"]
-	path = links/.config/nvim/bundle/vimwiki
-	url = https://github.com/vimwiki/vimwiki.git
-[submodule "links/.config/nvim/bundle/vim-nix"]
-	path = links/.config/nvim/bundle/vim-nix
-	url = https://github.com/LnL7/vim-nix.git
-[submodule "links/.config/nvim/bundle/vim-json"]
-	path = links/.config/nvim/bundle/vim-json
-	url = https://github.com/elzr/vim-json.git
-[submodule "links/.config/nvim/bundle/vim-toml"]
-	path = links/.config/nvim/bundle/vim-toml
-	url = https://github.com/cespare/vim-toml.git
-[submodule "links/.config/nvim/bundle/Nvim-R"]
-	path = links/.config/nvim/bundle/Nvim-R
-	url = https://github.com/jalvesaq/Nvim-R.git
 [submodule "links/.zsh/plugins/zsh-autosuggestions"]
 	path = links/.zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
