@@ -1,54 +1,24 @@
-[submodule "links/.config/nvim/bundle/syntastic"]
-	path = links/.config/nvim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "links/.zsh/plugins/zsh-syntax-highlighting"]
 	path = links/.zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "links/.config/nvim/bundle/vim-jinja"]
 	path = links/.config/nvim/bundle/vim-jinja
 	url = https://github.com/lepture/vim-jinja.git
-[submodule "links/.config/nvim/bundle/neocomplete"]
-	path = links/.config/nvim/bundle/neocomplete
-	url = https://github.com/Shougo/neocomplete.vim.git
-[submodule "links/.config/nvim/bundle/vim-afterimage"]
-	path = links/.config/nvim/bundle/vim-afterimage
-	url = https://github.com/tpope/vim-afterimage.git
-[submodule "links/.config/nvim/bundle/vim-eunuch"]
-	path = links/.config/nvim/bundle/vim-eunuch
-	url = https://github.com/tpope/vim-eunuch.git
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
 	url = https://github.com/jackson13info/mla13.git
-[submodule "links/.config/nvim/bundle/tmuxline.vim"]
-	path = links/.config/nvim/bundle/tmuxline.vim
-	url = https://github.com/edkolev/tmuxline.vim.git
 [submodule "links/.config/nvim/bundle/rust.vim"]
 	path = links/.config/nvim/bundle/rust.vim
 	url = https://github.com/wting/rust.vim.git
 [submodule "links/.config/nvim/bundle/salt-vim"]
 	path = links/.config/nvim/bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim.git
-[submodule "links/.config/nvim/bundle/vim-gitgutter"]
-	path = links/.config/nvim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "links/.config/nvim/bundle/YouCompleteMe"]
-	path = links/.config/nvim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "links/.config/nvim/bundle/calendar.vim"]
-	path = links/.config/nvim/bundle/calendar.vim
-	url = https://github.com/itchyny/calendar.vim
 [submodule "links/makefile-templates"]
 	path = links/makefile-templates
 	url = https://github.com/zml2008/makefile-templates.git
 [submodule "links/.config/nvim/bundle/kotlin-vim"]
 	path = links/.config/nvim/bundle/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
-[submodule "links/.config/nvim/bundle/vim-easy-align"]
-	path = links/.config/nvim/bundle/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "links/.config/nvim/bundle/unite.vim"]
-	path = links/.config/nvim/bundle/unite.vim
-	url = https://github.com/Shougo/unite.vim.git
 [submodule "links/.config/nvim/bundle/vison"]
 	path = links/.config/nvim/bundle/vison
 	url = https://github.com/Quramy/vison.git
@@ -79,6 +49,3 @@
 [submodule "links/.local/share/tkthemes"]
 	path = links/.local/share/tkthemes
 	url = https://github.com/thindil/tkBreeze.git
-[submodule "links/.config/nvim/lazy.nvim"]
-	path = links/.local/share/nvim/lazy/lazy.nvim
-	url = https://github.com/folke/lazy.nvim
