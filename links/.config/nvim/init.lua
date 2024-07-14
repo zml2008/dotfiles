@@ -46,7 +46,7 @@ require("lazy").setup({
     { "saadparwaiz1/cmp_luasnip"},
     {
         "hrsh7th/nvim-cmp",
-        setup = function()
+        config = function()
             local luasnip = require 'luasnip'
             local cmp = require 'cmp'
             cmp.setup {
@@ -85,7 +85,8 @@ require("lazy").setup({
                 }),
                 sources = {
                     { name = "nvim_lsp" },
-                    { name = "luasnip" }
+                    { name = "luasnip" },
+                    { name = "lazydev", group_index = 0 }
                 }
             }
             cmp.setup.cmdline(':', {
@@ -130,6 +131,7 @@ require("lazy").setup({
                 'marksman',
                 'texlab',
                 'ltex',
+                'lua_ls',
                 'pkgbuild_language_server',
                 'r_language_server',
                 'yamlls'
@@ -137,35 +139,20 @@ require("lazy").setup({
             for _, lsp in ipairs(plain_servers) do
                 lspconfig[lsp].setup { capabilities = capabilities }
             end
-            lspconfig.lua_ls.setup {
-                capabilites = capabilities,
-                on_init = function(client)
-                    -- setup to work with vim's world
-                    local path = client.workspace_folders[1].name
-                    if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
-                        return
-                    end
-
-                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-                        runtime = {
-                            version = 'LuaJIT'
-                        },
-                        -- Make the server aware of Neovim runtime files
-                        workspace = {
-                            library = {
-                                vim.env.VIMRUNTIME
-                            }
-                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-                            -- library = vim.api.nvim_get_runtime_file("", true)
-                        }
-                    })
-                end,
-                settings = {
-                    Lua = {}
-                }
-            }
         end
     },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     { "editorconfig/editorconfig-vim" },
     { "lewis6991/gitsigns.nvim", config = function()
           require('gitsigns').setup()
