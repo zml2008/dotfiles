@@ -5,7 +5,6 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
         vim.o.filetype = 'markdown'
     end
 })
--- vim.cmd.syntax('enable')
 
 -- Styling
 if vim.fn.has("termguicolors") then
@@ -185,7 +184,7 @@ require("lazy").setup({
     {
         "vim-airline/vim-airline",
         dependencies = { "vim-airline/vim-airline-themes" },
-        config = function()
+        init = function()
             vim.g.airline_theme = 'palenight'
             vim.g.airline_powerline_fonts = 1
         end
