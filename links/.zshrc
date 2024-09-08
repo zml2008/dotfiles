@@ -23,7 +23,7 @@ esac
 [[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]] && tty -s && exec tmx gen-base # Only open tmux automatically when we have a grahpcial session -- somehow tmux messes with startx :(
 
 # Set the editor
-# export VLESS=$(find $(dirname $(which nvim))/../share/nvim/runtime/ -name 'less.sh')
+export VLESS=$(find $(dirname $(which nvim))/../share/nvim/runtime/macros/ -name 'less.sh')
 if [ ! -z $VLESS ]; then
     alias less=$VLESS
 fi

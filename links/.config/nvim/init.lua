@@ -37,7 +37,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { "hrsh7th/cmp-nvim-lsp" },
     {
         "L3MON4D3/LuaSnip",
         build = "make install_jsregexp"
@@ -45,6 +44,7 @@ require("lazy").setup({
     { "saadparwaiz1/cmp_luasnip"},
     {
         "hrsh7th/nvim-cmp",
+        dependencies = { "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp" },
         config = function()
             local luasnip = require 'luasnip'
             local cmp = require 'cmp'
@@ -82,19 +82,31 @@ require("lazy").setup({
                         end
                     end, { 'i', 's' }),
                 }),
-                sources = {
+                sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "lazydev", group_index = 0 }
-                }
+                }, {
+                        { name = 'buffer' },
+                })
             }
+
+            -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline({ '/', '?' }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = 'path' }
                 }, {
                     { name = 'cmdline' }
-                })
+                }),
+                matching = { disallow_symbol_nonprefix_matching = false }
             })
         end
     },
@@ -107,7 +119,7 @@ require("lazy").setup({
                                      "bash", "toml", "json", "json5", "jsonc", "yaml", "xml", "python",
                                      "kotlin", "java", "latex", "groovy",
                                      "typescript", "css", "html",
-                                     "r", "d", "nix", "git_config", "git_rebase"
+                                     "r", "d", "nix", "git_config", "git_rebase", "diff"
                                  },
                 highlight = { enable = true },
                 indent = { enable = true }
@@ -128,6 +140,7 @@ require("lazy").setup({
                 'jdtls',
                 'jsonls',
                 'marksman',
+                'pyright',
                 'texlab',
                 'ltex',
                 'lua_ls',

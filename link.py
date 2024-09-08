@@ -40,7 +40,7 @@ class DotfileLinker(object):
         else:
             self.ignore_dirs = IGNORE_DIRS
 
-    
+
     def load(self):
         try:
             with open(join(self.target_dir, "." + self.instance_name + "_links"), 'rt') as f:
@@ -55,7 +55,7 @@ class DotfileLinker(object):
     def link(self):
         created_links = {}
 
-        # Create new links, replacing 
+        # Create new links, replacing
         for root, dirs, files in os.walk(self.links_dir):
             for i in self.ignore_dirs:
                 if i in dirs: dirs.remove(i)
@@ -70,7 +70,7 @@ class DotfileLinker(object):
                 check_dir(home_path)
 
                 if isfile(home_path) and not islink(home_path):
-                    bak_path = home_path 
+                    bak_path = home_path
                     while isfile(bak_path):
                         bak_path = bak_path + ".bak"
                     shutil.move(home_path, bak_path)
