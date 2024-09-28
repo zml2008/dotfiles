@@ -1,6 +1,7 @@
 [submodule "links/.zsh/plugins/zsh-syntax-highlighting"]
 	path = links/.zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	branch = master
 [submodule "links/texmf/tex/latex/mla13"]
 	path = links/texmf/tex/latex/mla13
 	url = https://github.com/jackson13info/mla13.git
@@ -10,9 +11,7 @@
 [submodule "links/.zsh/plugins/zsh-autosuggestions"]
 	path = links/.zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "links/.locale/share/tkthemes"]
-	path = links/.locale/share/tkthemes
-	url = https://github.com/thindil/tkBreeze.git
+	branch = master
 [submodule "links/.local/share/tkthemes"]
 	path = links/.local/share/tkthemes
 	url = https://github.com/thindil/tkBreeze.git
