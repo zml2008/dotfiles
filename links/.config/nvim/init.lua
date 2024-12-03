@@ -113,18 +113,16 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function()
-            require 'nvim-treesitter.configs'.setup {
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "markdown_inline",
-                                     "bash", "toml", "json", "json5", "jsonc", "yaml", "xml", "python",
-                                     "kotlin", "java", "latex", "groovy",
-                                     "typescript", "css", "html",
-                                     "r", "d", "nix", "git_config", "git_rebase", "diff"
-                                 },
-                highlight = { enable = true },
-                indent = { enable = true }
-            }
-        end
+        opts = {
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "markdown", "markdown_inline",
+                "bash", "toml", "json", "json5", "jsonc", "yaml", "xml", "python",
+                "kotlin", "java", "latex", "groovy",
+                "typescript", "css", "html",
+                "r", "d", "nix", "git_config", "git_rebase", "diff"
+            },
+            highlight = { enable = true },
+            indent = { enable = true }
+        }
     },
     { url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git"},
     {
@@ -166,9 +164,9 @@ require("lazy").setup({
     },
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     { "editorconfig/editorconfig-vim" },
-    { "lewis6991/gitsigns.nvim", config = function()
-          require('gitsigns').setup()
-      end
+    {
+        "lewis6991/gitsigns.nvim",
+        config = true
     },
     {
         "junegunn/vim-easy-align",
@@ -181,32 +179,40 @@ require("lazy").setup({
     { "udalov/kotlin-vim" },
     -- appearence
     {
-        "drewtempelmeyer/palenight.vim",
-        lazy = false,
+        "alexmozaidze/palenight.nvim",
         priority = 1000,
-        config = function()
+        init = function ()
+            require "palenight/colors/truecolor".black = "#180920"
+            require "palenight/colors/cterm256".black = 54
+            require "palenight/colors/cterm16".black = 0
             vim.o.background='dark'
-            vim.g.palenight_color_overrides = {
-                black = { gui = "#180920", cterm = "54", cterm16 = "0" }
+        end,
+        config = function()
+            require("palenight").setup {
+                italic = true
             }
-
-            vim.g.palenight_terminal_italics=1
             vim.cmd.colorscheme('palenight')
         end
     },
     {
-        "vim-airline/vim-airline",
-        dependencies = { "vim-airline/vim-airline-themes" },
-        init = function()
-            vim.g.airline_theme = 'palenight'
-            vim.g.airline_powerline_fonts = 1
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            options = {
+                theme = 'palenight'
+            }
+        }
+    },
+    {
+        "edkolev/tmuxline.vim",
+        init = function ()
+            vim.g.tmuxline_theme = 'jellybeans'
         end
     },
-    { "edkolev/tmuxline.vim" },
     {
         "edkolev/promptline.vim",
         config = function()
-            vim.g.promptline_theme = 'airline'
+            vim.g.promptline_theme = 'jelly'
             vim.g.promptline_preset = {
                 a = { '$(date +%H:%M:%S)'},
                 b = { vim.fn['promptline#slices#user']() },
